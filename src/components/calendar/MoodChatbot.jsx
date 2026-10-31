@@ -132,7 +132,7 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
           content: message.text,
         }));
 
-      const response = await fetch("http://localhost:5000/api/chat", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
