@@ -1,0 +1,330 @@
+/* Calendar and chatbot layout */
+.calendar-chat-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+  align-items: start;
+  gap: 24px;
+  width: 100%;
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Prevent children from overflowing their columns */
+.calendar-chat-layout > * {
+  min-width: 0;
+}
+
+/* ========================================
+   CALENDAR PAGE TEXT
+======================================== */
+
+/* Main page heading */
+.calendar-page-title {
+  margin: 64px 0 32px;
+  color: #77c981;
+  font-family: "Schoolbell", cursive;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Feature card headings */
+.calendar-feature-title {
+  margin: 0 0 8px;
+  color: #ec6690 !important;
+  font-family: "Sniglet", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Feature card descriptions */
+.calendar-feature-text {
+  margin: 0;
+  color: #4b5563;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Mental health support link */
+.calendar-support-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #ec6690;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.calendar-support-link:hover {
+  color: #c94570;
+}
+
+/* Footer */
+.calendar-footer {
+  margin-top: 48px;
+  color: #6b7280;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.calendar-footer p {
+  margin: 4px 0;
+}
+
+/* Back to top */
+.calendar-back-to-top {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.calendar-back-to-top img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.calendar-back-to-top:hover img {
+  transform: translateY(-3px);
+}
+
+/* ========================================
+   RESPONSIVE TEXT
+======================================== */
+
+@media (max-width: 768px) {
+  .calendar-page-title {
+    margin-top: 48px;
+    font-size: 30px;
+  }
+
+  .calendar-feature-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-page-title {
+    margin: 40px 0 24px;
+    font-size: 25px;
+  }
+
+  .calendar-feature-text,
+  .calendar-support-link {
+    font-size: 13px;
+  }
+
+  .calendar-footer {
+    margin-top: 36px;
+    font-size: 12px;
+  }
+}
+
+/* Tablet and mobile */
+@media (max-width: 768px) {
+  .calendar-chat-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 8px;
+  }
+}
+/* ========================================
+   MOOD NOTE POPUP
+======================================== */
+
+.note-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(53, 71, 71, 0.45);
+  backdrop-filter: blur(5px);
+  animation: popupFadeIn 0.25s ease;
+}
+
+.note-popup {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 32px 28px;
+  border: 2px solid #f8dce2;
+  border-radius: 24px;
+  background: #fffaf9;
+  box-shadow: 0 12px 40px rgba(53, 71, 71, 0.16);
+  text-align: center;
+  animation: popupSlideIn 0.3s ease;
+}
+
+.note-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 28px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.note-popup-close:hover {
+  color: #df5462;
+}
+
+.note-popup-emoji {
+  margin-bottom: 8px;
+  font-size: 42px;
+}
+
+.note-popup h3 {
+  margin: 0;
+  color: #df5462;
+  font-family: "Schoolbell", cursive;
+  font-size: 28px;
+}
+
+.note-popup-date {
+  margin: 8px 0 20px;
+  color: #9ca3af;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+}
+
+.note-popup-text {
+  min-height: 90px;
+  padding: 18px;
+  border: 1px solid #f5dce1;
+  border-radius: 14px;
+  background: #fff1f3;
+  color: #4b5563;
+  font-family: "Sniglet", sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.note-popup-input {
+  display: block;
+  width: 100%;
+  min-height: 130px;
+  padding: 16px;
+  border: 1px solid #f2cbd4;
+  border-radius: 14px;
+  outline: none;
+  background: #fff1f3;
+  color: #4b5563;
+  font-family: "Sniglet", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  resize: vertical;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.note-popup-input:focus {
+  border-color: #df5462;
+  box-shadow: 0 0 0 3px rgba(223, 84, 98, 0.12);
+}
+
+.note-popup-input::placeholder {
+  color: #c4a4aa;
+}
+
+.note-popup-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.note-popup-button {
+  padding: 10px 22px;
+  border: 2px solid #df5462;
+  border-radius: 12px;
+  background: #df5462;
+  color: white;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.note-popup-button:hover {
+  transform: translateY(-2px);
+  background: #c94553;
+}
+
+.note-popup-button.secondary {
+  background: transparent;
+  color: #df5462;
+}
+
+.note-popup-button.secondary:hover {
+  background: #fff1f3;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .note-popup {
+    padding: 28px 18px;
+  }
+
+  .note-popup h3 {
+    font-size: 24px;
+  }
+
+  .note-popup-actions {
+    gap: 8px;
+  }
+
+  .note-popup-button {
+    padding: 9px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-popup-overlay,
+  .note-popup {
+    animation: none;
+  }
+}

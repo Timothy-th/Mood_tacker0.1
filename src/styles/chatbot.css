@@ -1,0 +1,382 @@
+/* ==============================
+   MOOD CHATBOT
+============================== */
+
+.mood-chatbot {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 775px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-top: 35px;
+  background: #ffffff;
+  border: 2px dashed #f3aeb2;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(53, 71, 71, 0.08);
+
+  font-family: "Sniglet", sans-serif;
+  color: #354747;
+}
+
+/* Date and time */
+
+.chatbot-header {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 4px 0 12px;
+}
+
+.chatbot-date {
+  margin: 0;
+  color: #eb8189;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.chatbot-time {
+  margin: 5px 0 0;
+  color: #8b9292;
+  font-size: 12px;
+}
+
+/* Current mood */
+
+.chatbot-current-mood {
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  padding: 14px 10px;
+  text-align: center;
+
+  background: #f1f7eb;
+  border: 1px solid #e5efdc;
+  border-radius: 14px;
+}
+
+.current-mood-label {
+  margin: 0 0 5px;
+  color: #858c8c;
+  font-size: 13px;
+}
+
+.current-mood-value {
+  color: #d95f70;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* Chat message area */
+
+.chatbot-messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  padding: 14px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+  background: #c9d9bf;
+  border-radius: 10px;
+}
+
+.chatbot-message-row {
+  display: flex;
+  width: 100%;
+}
+
+.user-message-row {
+  justify-content: flex-end;
+}
+
+.bot-message-row {
+  justify-content: flex-start;
+}
+
+.chatbot-message {
+  max-width: 85%;
+  margin: 0;
+  padding: 11px 14px;
+
+  border-radius: 17px;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.user-message {
+  color: #ffffff;
+  background: #eb8189;
+  border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+  color: #354747;
+  background: #dcebd3;
+  border-bottom-left-radius: 5px;
+}
+
+/* Message input */
+
+.chatbot-form {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chatbot-input {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  padding: 11px 13px;
+
+  color: #354747;
+  background: #ffffff;
+  border: 1px solid #f0cbd2;
+  border-radius: 12px;
+  outline: none;
+
+  font-family: "Sniglet", sans-serif;
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chatbot-input::placeholder {
+  color: #a5aaaa;
+}
+
+.chatbot-input:focus {
+  border-color: #eb8189;
+  box-shadow: 0 0 0 3px rgba(235, 129, 137, 0.15);
+}
+
+.chatbot-send-btn {
+  flex-shrink: 0;
+  padding: 10px 17px;
+
+  color: #ffffff;
+  background: #eb8189;
+  border: 1px solid #eb8189;
+  border-radius: 12px;
+
+  font-family: "Sniglet", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.chatbot-send-btn:hover {
+  background: #d96573;
+  transform: translateY(-1px);
+}
+
+.chatbot-send-btn:focus-visible {
+  outline: 3px solid #c9e3bd;
+  outline-offset: 3px;
+}
+
+/* Footer */
+
+.chatbot-footer {
+  flex-shrink: 0;
+  padding: 15px 4px 2px;
+  text-align: center;
+}
+
+.chatbot-footer h3 {
+  margin: 0;
+  color: #eb8189;
+  font-family: "Schoolbell", cursive;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.chatbot-footer p {
+  margin: 6px 0 0;
+  color: #858c8c;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .mood-chatbot {
+    height: 600px;
+    padding: 13px;
+    border-radius: 16px;
+  }
+
+  .chatbot-messages {
+    padding: 11px;
+  }
+
+  .chatbot-footer h3 {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mood-chatbot {
+    height: 570px;
+  }
+
+  .chatbot-message {
+    max-width: 90%;
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .chatbot-input {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .chatbot-send-btn {
+    padding: 9px 13px;
+  }
+
+  .chatbot-footer p {
+    font-size: 11px;
+  }
+}
+.clear-chat-btn {
+  padding: 8px 14px;
+  border: 1px solid #f2c6cb;
+  border-radius: 12px;
+  background: #fff5f6;
+  color: #df5462;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-chat-btn:hover {
+  background: #df5462;
+  color: white;
+}
+
+.clear-chat-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Clear Chat Confirmation Popup */
+
+.clear-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(53, 71, 71, 0.4);
+  backdrop-filter: blur(4px);
+  animation: popupFade 0.2s ease;
+}
+
+.clear-popup {
+  width: 100%;
+  max-width: 360px;
+  padding: 28px 24px;
+  border-radius: 22px;
+  background: #fff8f8;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(53, 71, 71, 0.15);
+  animation: popupAppear 0.25s ease;
+}
+
+.clear-popup-icon {
+  margin-bottom: 12px;
+  font-size: 38px;
+}
+
+.clear-popup h3 {
+  margin-bottom: 10px;
+  color: #354747;
+  font-family: "Schoolbell", cursive;
+  font-size: 24px;
+}
+
+.clear-popup p {
+  margin-bottom: 24px;
+  color: #718080;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.clear-popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.clear-popup-actions button {
+  flex: 1;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.clear-popup-cancel {
+  background: #edf3e9;
+  color: #536653;
+}
+
+.clear-popup-cancel:hover {
+  background: #dfead8;
+}
+
+.clear-popup-confirm {
+  background: #df5462;
+  color: white;
+}
+
+.clear-popup-confirm:hover {
+  background: #c94352;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

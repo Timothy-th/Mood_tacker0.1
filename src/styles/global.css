@@ -1,0 +1,203 @@
+:root {
+  --font-main: "Schoolbell", cursive;
+  --font-secondary: "Sniglet", sans-serif;
+
+  --color-primary: #df5462;
+  --color-background: #f1f7eb;
+  --color-text: #354747;
+  --color-white: #ffffff;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --transition: 0.25s ease;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-secondary);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+#root {
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ==============================
+   4. FONT UTILITY CLASSES
+   ============================== */
+
+.font-main {
+  font-family: var(--font-main);
+}
+
+.font-secondary {
+  font-family: var(--font-secondary);
+}
+
+/* Main headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-main);
+  margin-top: 0;
+}
+
+/* Secondary text */
+p,
+span,
+label,
+input,
+textarea,
+select {
+  font-family: var(--font-secondary);
+}
+
+/* ==============================
+   5. TEXT COLOR CLASSES
+   ============================== */
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-main {
+  color: var(--color-text);
+}
+
+.text-white {
+  color: var(--color-white);
+}
+
+/* ==============================
+   6. BUTTON CLASSES
+   ============================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 22px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+
+  font-family: var(--font-secondary);
+  font-weight: 800;
+  text-decoration: none;
+
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+/* Main pink-red button */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: #c94452;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px #df546233;
+}
+
+/* Secondary outline button */
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Soft background button */
+.btn-soft {
+  background-color: #fbe5e7;
+  color: var(--color-primary);
+}
+
+.btn-soft:hover {
+  background-color: #f5d0d4;
+  transform: translateY(-2px);
+}
+
+/* Full-width button */
+.btn-block {
+  width: 100%;
+}
+
+/* ==============================
+   7. REUSABLE LAYOUT CLASSES
+   ============================== */
+
+.page-container {
+  width: min(100% - 32px, 1200px);
+  margin-inline: auto;
+}
+
+.card {
+  padding: 24px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+}
+
+/* ==============================
+   8. ACCESSIBILITY
+   ============================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #df546288;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

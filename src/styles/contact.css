@@ -1,0 +1,130 @@
+/* ================================
+   Contact Page
+   ================================ */
+
+.contact-page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 112px 16px 40px;
+  background: rgba(255, 241, 242, 0.4);
+}
+
+.contact-page-container {
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+}
+
+/* Footer */
+
+.contact-footer {
+  max-width: 896px;
+  margin: 48px auto 0;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.contact-footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-footer-title {
+  color: #881337;
+  font-family: "Sniglet", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.contact-footer-description {
+  max-width: 672px;
+  margin-top: 16px;
+  color: #4b5563;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.contact-footer-copyright {
+  margin-top: 24px;
+  color: #6b7280;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+}
+
+/* Back to top */
+
+.contact-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  transition: transform 0.2s ease;
+}
+
+.contact-back-to-top:hover {
+  transform: translateY(-4px);
+}
+
+.contact-back-to-top:focus-visible {
+  outline: 3px solid #fb7185;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.contact-back-to-top img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* Icon credit */
+
+.contact-icon-credit {
+  margin-top: 8px;
+  color: #f43f5e;
+  font-family: "Sniglet", sans-serif;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.contact-icon-credit:hover {
+  color: #be123c;
+}
+
+/* Responsive styles */
+
+@media (min-width: 640px) {
+  .contact-page {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .contact-footer-title {
+    font-size: 30px;
+  }
+
+  .contact-footer-description {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-page {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-back-to-top,
+  .contact-icon-credit {
+    transition: none;
+  }
+}

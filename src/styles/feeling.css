@@ -1,0 +1,196 @@
+/* Main feeling card */
+.feeling-card {
+  width: 100%;
+  max-width: 896px;
+  box-sizing: border-box;
+  margin: 35px auto;
+  padding: 32px;
+  background: #f1f7eb;
+  border: 2px solid #e8fad6;
+  border-radius: 24px;
+  box-shadow: 0 8px 28px rgba(223, 84, 98, 0.09);
+  color: #354747;
+  font-family: "Sniglet", sans-serif;
+}
+
+/* Heading */
+.feeling-title {
+  margin: 0 0 28px;
+  color: #77c981;
+  font-family: "Schoolbell", cursive;
+  font-size: 34px;
+  font-weight: normal;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Mood grid */
+.feeling-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* Individual mood option */
+.feeling-option {
+  display: flex;
+  min-height: 112px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 10px;
+  border: 2px solid #f8e5e8;
+  border-radius: 18px;
+  background: #fff8f8;
+  color: #53615e;
+  font-family: "Sniglet", sans-serif;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.feeling-option:hover {
+  transform: translateY(-4px);
+  border-color: #efb4bd;
+  background: #fff0f2;
+  box-shadow: 0 6px 14px rgba(223, 84, 98, 0.1);
+}
+
+.feeling-option.selected {
+  border-color: #df5462;
+  background: #ffe8ec;
+  color: #9c3444;
+  box-shadow: 0 0 0 3px rgba(223, 84, 98, 0.12);
+}
+
+.feeling-option:focus-visible {
+  outline: 3px solid #77c981;
+  outline-offset: 3px;
+}
+
+/* Emoji and label */
+.feeling-emoji {
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.feeling-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Feedback message */
+.feeling-message {
+  margin: 22px 0 0;
+  color: #c94553;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Submit button */
+.feeling-submit-area {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.feeling-submit-btn {
+  padding: 13px 32px;
+  border: 2px solid #df5462;
+  border-radius: 14px;
+  background: #df5462;
+  color: #fff;
+  font-family: "Sniglet", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(223, 84, 98, 0.17);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.feeling-submit-btn:hover {
+  transform: translateY(-2px);
+  background: #c94553;
+  border-color: #c94553;
+  box-shadow: 0 8px 16px rgba(223, 84, 98, 0.2);
+}
+
+.feeling-submit-btn:active {
+  transform: scale(0.97);
+}
+
+.feeling-submit-btn:focus-visible {
+  outline: 3px solid #77c981;
+  outline-offset: 4px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .feeling-card {
+    width: 92%;
+    padding: 26px 22px;
+  }
+
+  .feeling-title {
+    font-size: 30px;
+  }
+
+  .feeling-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .feeling-card {
+    width: 94%;
+    margin: 22px auto;
+    padding: 22px 14px;
+    border-radius: 20px;
+  }
+
+  .feeling-title {
+    margin-bottom: 22px;
+    font-size: 27px;
+  }
+
+  .feeling-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .feeling-option {
+    min-height: 100px;
+    padding: 12px 8px;
+    border-radius: 15px;
+  }
+
+  .feeling-emoji {
+    font-size: 30px;
+  }
+
+  .feeling-name {
+    font-size: 14px;
+  }
+
+  .feeling-submit-btn {
+    width: 100%;
+    padding: 12px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feeling-option,
+  .feeling-submit-btn {
+    transition: none;
+  }
+}

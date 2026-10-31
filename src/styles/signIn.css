@@ -1,0 +1,232 @@
+/* Sign-in page */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+
+  padding: 24px;
+  box-sizing: border-box;
+
+  background-color: #f0fdf3;
+  color: #354747;
+}
+
+/* Sign-in card */
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+
+  padding: 36px;
+  box-sizing: border-box;
+
+  background-color: #f1f7eb;
+  border: 1px solid #e0eee4;
+  border-radius: 24px;
+
+  box-shadow: 0 10px 35px rgba(53, 71, 71, 0.09);
+
+  animation: signin-appear 0.7s ease both;
+}
+
+.auth-card h1 {
+  margin: 0 0 12px;
+
+  color: #77c981;
+  font-family: "Schoolbell", cursive;
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.3;
+  text-align: center;
+}
+
+.auth-card > p {
+  margin: 0;
+
+  color: #63776b;
+  font-family: "Sniglet", sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* Form layout */
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  margin-top: 28px;
+}
+
+.auth-card label {
+  margin-top: 6px;
+
+  color: #354747;
+  font-family: "Sniglet", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* Input fields */
+.auth-card input {
+  width: 100%;
+  min-height: 46px;
+
+  padding: 11px 13px;
+  box-sizing: border-box;
+
+  border: 1px solid #cbd9c8;
+  border-radius: 12px;
+
+  background-color: #ffffff;
+  color: #354747;
+
+  font-family: "Sniglet", sans-serif;
+  font-size: 15px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: #aad480;
+  box-shadow: 0 0 0 3px rgba(170, 212, 128, 0.25);
+}
+
+/* Sign-in button */
+.auth-card form .welcome-btn {
+  width: 100%;
+  min-height: 48px;
+
+  margin-top: 14px;
+  padding: 12px 18px;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: #df5462;
+  color: #ffffff;
+
+  font-family: "Sniglet", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-card form .welcome-btn:hover {
+  background-color: #c94352;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(53, 71, 71, 0.1);
+}
+
+.auth-card form .welcome-btn:focus-visible {
+  outline: 3px solid #354747;
+  outline-offset: 3px;
+}
+
+/* Error message */
+.auth-card .auth-error {
+  margin: 6px 0;
+
+  color: #c12f40;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* Create-account link */
+.auth-card .auth-footer {
+  margin-top: 24px;
+
+  color: #63776b;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.auth-card .auth-footer a {
+  color: #c94352;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-card .auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Back-to-welcome link */
+.auth-card p.back-link {
+  display: block;
+  width: 100%;
+  margin: 18px 0 0;
+  text-align: center;
+}
+
+.auth-card p.back-link a {
+  display: inline-block;
+  color: #63776b !important;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+.auth-card p.back-link a:hover {
+  color: #df5462 !important;
+  text-decoration: underline !important;
+}
+
+/* Entrance animation */
+@keyframes signin-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 18px;
+  }
+
+  .auth-card {
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+
+  .auth-card h1 {
+    font-size: 29px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .auth-card {
+    animation: none;
+  }
+
+  .auth-card input,
+  .auth-card form .welcome-btn,
+  .auth-card .back-link {
+    transition: none;
+  }
+}

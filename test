@@ -1,0 +1,898 @@
+// Calendar.jsx
+
+// import { useState } from "react";\
+// import MoodCalendar from "../components/calendar/MoodCalendar";\
+// import MoodChatbot from "../components/calendar/MoodChatbot";\
+// import "../styles/cal_layout.css";\
+// import "../styles/global.css";\
+// const getLocalDate = () => {\
+// &#x20; const date = new Date();\
+// &#x20; const year = date.getFullYear();\
+// &#x20; const month = String(date.getMonth() + 1).padStart(2, "0");\
+// &#x20; const day = String(date.getDate()).padStart(2, "0");\
+// &#x20; return \`${year}-${month}-${day}\`;\
+// };\
+// const loadNotes = () => {\
+// &#x20; try {\
+// &#x20;   return JSON.parse(localStorage.getItem("calendarNotes") || "{}");\
+// &#x20; } catch {\
+// &#x20;   return {};\
+// &#x20; }\
+// };\
+// const Calendar = () => {\
+// &#x20; const [notes, setNotes] = useState(loadNotes);\
+// &#x20; const [selectedDate, setSelectedDate] = useState(getLocalDate);\
+// &#x20; const currentMood = notes[selectedDate] || "";\
+// &#x20; const handleNotesChange = (updatedNotes) => {\
+// &#x20;   setNotes(updatedNotes);\
+// &#x20; };\
+// &#x20; return (\
+// &#x20;   \<main className="min-h-screen bg-[#fff8f8] px-4 py-8 md:px-8">\
+// &#x20;     \<h2 className="calendar-page-title">\
+// &#x20;       Let's figure out how you feel today.\
+// &#x20;     \</h2>\
+// &#x20;     \<div className="calendar-chat-layout font-secondary">\
+// &#x20;       {" "}\
+// &#x20;       \<MoodCalendar\
+// &#x20;         notes={notes}\
+// &#x20;         onNotesChange={handleNotesChange}\
+// &#x20;         onDateSelect={setSelectedDate}\
+// &#x20;       />\
+// &#x20;       \<MoodChatbot selectedDate={selectedDate} currentMood={currentMood} />\
+// &#x20;     \</div>\
+// &#x20;     \<section className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-6 text-center md:grid-cols-3">\
+// &#x20;       \<article className="rounded-2xl bg-white p-6 shadow-sm">\
+// &#x20;         \<img\
+// &#x20;           src="/image/wired-lineal-2742-logo-square-signal-hover-pinch.gif"\
+// &#x20;           alt="Community"\
+// &#x20;           className="mx-auto mb-3 h-12 w-12 object-contain"\
+// &#x20;         />\
+// &#x20;         \<h3 className="mb-2 font-semibold calendar-feature-title font-main">\
+// &#x20;           Contact & Community\
+// &#x20;         \</h3>\
+// &#x20;         \<p className="calendar-feature-text">\
+// &#x20;           Want to talk to someone? Visit our Contact page to share your\
+// &#x20;           thoughts and find support.\
+// &#x20;         \</p>\
+// &#x20;       \</article>\
+// &#x20;       \<article className="rounded-2xl bg-white p-6 shadow-sm">\
+// &#x20;         \<img\
+// &#x20;           src="/image/wired-lineal-471-ebook-reader-hover-pinch.gif"\
+// &#x20;           alt="Resources"\
+// &#x20;           className="mx-auto mb-3 h-12 w-12 object-contain"\
+// &#x20;         />\
+// &#x20;         \<h3 className="mb-2 font-semibold calendar-feature-title font-main">\
+// &#x20;           Mental Health Resources\
+// &#x20;         \</h3>\
+// &#x20;         \<p className="text-sm text-gray-600">\
+// &#x20;           Explore helpful resources and reach out to a trusted person or\
+// &#x20;           professional when you need support.\
+// &#x20;         \</p>\
+// &#x20;         \<a\
+// &#x20;           href="[https://www.samhsa.gov/mental-health](https://www.samhsa.gov/mental-health)"\
+// &#x20;           target="\_blank"\
+// &#x20;           rel="noreferrer"\
+// &#x20;           className="calendar-support-link"\
+// &#x20;         \>\
+// &#x20;           Support resources\
+// &#x20;         \</a>\
+// &#x20;       \</article>\
+// &#x20;       \<article className="rounded-2xl bg-white p-6 shadow-sm">\
+// &#x20;         \<img\
+// &#x20;           src="/image/wired-lineal-2815-ghost-hover-pinch (1).gif"\
+// &#x20;           alt="Privacy"\
+// &#x20;           className="mx-auto mb-3 h-12 w-12 object-contain"\
+// &#x20;         />\
+// &#x20;         \<h3 className="mb-2 font-semibold calendar-feature-title font-main">\
+// &#x20;           Privacy & Safety\
+// &#x20;         \</h3>\
+// &#x20;         \<p className="text-sm text-gray-600">\
+// &#x20;           Your mood notes are stored locally in this browser. Remember to\
+// &#x20;           celebrate your progress, even in small steps.\
+// &#x20;         \</p>\
+// &#x20;       \</article>\
+// &#x20;     \</section>\
+// &#x20;     \<footer className="calendar-footer">\
+// &#x20;       \<p>Take care of your feelings—one mood at a time.\</p>\
+// &#x20;       \<p>© 2026 Mood Tracker Project\</p>\
+// &#x20;       \<a\
+// &#x20;         href="#to-top"\
+// &#x20;         className="calendar-back-to-top"\
+// &#x20;         aria-label="Back to top"\
+// &#x20;       \>\
+// &#x20;         \<img\
+// &#x20;           src="/image/wired-lineal-259-share-arrow-hover-pointing.gif"\
+// &#x20;           alt=""\
+// &#x20;         />\
+// &#x20;       \</a>\
+// &#x20;     \</footer>\
+// &#x20;   \</main>\
+// &#x20; );\
+// };\
+// export default Calendar;
+
+// MoodCalendar.jsx\
+// import { useState } from "react";\
+// import FullCalendar from "`@fullcalendar/react`";\
+// import dayGridPlugin from "`@fullcalendar/daygrid`";\
+// import interactionPlugin from "`@fullcalendar/interaction`";\
+// import "../../styles/calendar.css";\
+// \
+// const getMoodEmoji = (mood) => {\
+// &#x20; const moods = {\
+// &#x20;   happy: "😊",\
+// &#x20;   sad: "😢",\
+// &#x20;   angry: "😠",\
+// &#x20;   calm: "🌿",\
+// &#x20;   relaxed: "🧘",\
+// &#x20;   anxious: "😰",\
+// &#x20;   stressed: "😣",\
+// &#x20;   bored: "🥱",\
+// &#x20;   lonely: "😔",\
+// &#x20;   guilty: "😓",\
+// &#x20;   confused: "😕",\
+// &#x20;   fearful: "😨",\
+// &#x20; };\
+// \
+// &#x20; return moods[mood.trim().toLowerCase()] || "💌";\
+// };\
+// \
+// const MoodCalendar = ({ notes, onNotesChange, onDateSelect }) => {\
+// &#x20; const [events, setEvents] = useState(() => {\
+// &#x20;   try {\
+// &#x20;     return JSON.parse(localStorage.getItem("calendarEvents") || "[]");\
+// &#x20;   } catch {\
+// &#x20;     return [];\
+// &#x20;   }\
+// &#x20; });\
+// \
+// &#x20; const [selectedNote, setSelectedNote] = useState(null);\
+// \
+// &#x20; const handleDateClick = (info) => {\
+// &#x20;   const previousNote = notes[info.dateStr] || "";\
+// \
+// &#x20;   const note = window\.prompt(\
+// &#x20;     \`Enter or edit your mood for ${info.dateStr}:\`,\
+// &#x20;     previousNote,\
+// &#x20;   );\
+// \
+// &#x20;   if (note === null) return;\
+// \
+// &#x20;   const trimmedNote = note.trim();\
+// &#x20;   const updatedNotes = { ...notes };\
+// \
+// &#x20;   let updatedEvents = events.filter((event) => event.start !== info.dateStr);\
+// \
+// &#x20;   if (trimmedNote) {\
+// &#x20;     updatedNotes[info.dateStr] = trimmedNote;\
+// \
+// &#x20;     updatedEvents.push({\
+// &#x20;       title: getMoodEmoji(trimmedNote),\
+// &#x20;       start: info.dateStr,\
+// &#x20;       allDay: true,\
+// &#x20;       textColor: "black",\
+// &#x20;       extendedProps: {\
+// &#x20;         note: trimmedNote,\
+// &#x20;       },\
+// &#x20;     });\
+// &#x20;   } else {\
+// &#x20;     delete updatedNotes[info.dateStr];\
+// &#x20;   }\
+// \
+// &#x20;   setEvents(updatedEvents);\
+// &#x20;   onNotesChange(updatedNotes);\
+// &#x20;   onDateSelect(info.dateStr);\
+// \
+// &#x20;   localStorage.setItem("calendarEvents", JSON.stringify(updatedEvents));\
+// &#x20;   localStorage.setItem("calendarNotes", JSON.stringify(updatedNotes));\
+// &#x20; };\
+// \
+// &#x20; const handleEventClick = (info) => {\
+// &#x20;   const date = info.event.startStr.slice(0, 10);\
+// \
+// &#x20;   // Only open the note popup for envelope events.\
+// &#x20;   if (info.event.title === "💌") {\
+// &#x20;     const note = notes[date] || info.event.extendedProps?.note || "";\
+// \
+// &#x20;     setSelectedNote({\
+// &#x20;       date,\
+// &#x20;       text: note,\
+// &#x20;     });\
+// &#x20;   }\
+// &#x20; };\
+// \
+// &#x20; return (\
+// &#x20;   \<section className="mood-calendar-card">\
+// &#x20;     \<div className="mood-calendar">\
+// &#x20;       \<FullCalendar\
+// &#x20;         plugins={[dayGridPlugin, interactionPlugin]}\
+// &#x20;         initialView="dayGridMonth"\
+// &#x20;         headerToolbar={{\
+// &#x20;           left: "",\
+// &#x20;           center: "title",\
+// &#x20;           right: "prev,next",\
+// &#x20;         }}\
+// &#x20;         events={events}\
+// &#x20;         dateClick={handleDateClick}\
+// &#x20;         eventClick={handleEventClick}\
+// &#x20;         displayEventTime={false}\
+// &#x20;         height="auto"\
+// &#x20;       />\
+// &#x20;     \</div>\
+// \
+// &#x20;     \<p className="calendar-instruction">\
+// &#x20;       ✿ Click any date to add or edit your mood.\
+// &#x20;       \<br />\
+// &#x20;       💌 Click an envelope to read your note.\
+// &#x20;     \</p>\
+// \
+// &#x20;     {selectedNote && (\
+// &#x20;       \<div\
+// &#x20;         className="note-popup-overlay"\
+// &#x20;         onClick={() => setSelectedNote(null)}\
+// &#x20;       \>\
+// &#x20;         \<div\
+// &#x20;           className="note-popup"\
+// &#x20;           role="dialog"\
+// &#x20;           aria-modal="true"\
+// &#x20;           aria-labelledby="note-popup-title"\
+// &#x20;           onClick={(event) => event.stopPropagation()}\
+// &#x20;         \>\
+// &#x20;           \<button\
+// &#x20;             type="button"\
+// &#x20;             className="note-popup-close"\
+// &#x20;             onClick={() => setSelectedNote(null)}\
+// &#x20;             aria-label="Close note"\
+// &#x20;           \>\
+// &#x20;             ×\
+// &#x20;           \</button>\
+// \
+// &#x20;           \<div className="note-popup-emoji">💌\</div>\
+// \
+// &#x20;           \<h3 id="note-popup-title">A Little Note\</h3>\
+// \
+// &#x20;           \<p className="note-popup-date">{selectedNote.date}\</p>\
+// \
+// &#x20;           \<div className="note-popup-text">{selectedNote.text}\</div>\
+// \
+// &#x20;           \<button\
+// &#x20;             type="button"\
+// &#x20;             className="note-popup-button"\
+// &#x20;             onClick={() => setSelectedNote(null)}\
+// &#x20;           \>\
+// &#x20;             Close\
+// &#x20;           \</button>\
+// &#x20;         \</div>\
+// &#x20;       \</div>\
+// &#x20;     )}\
+// &#x20;   \</section>\
+// &#x20; );\
+// };\
+// \
+// export default MoodCalendar;\
+// MoodChatBot.jsx\
+// import { useEffect, useRef, useState } from "react";\
+// import "../../styles/chatbot.css";\
+// \
+// const MoodChatbot = ({ selectedDate, currentMood }) => {\
+// &#x20; const [messages, setMessages] = useState([\
+// &#x20;   {\
+// &#x20;     role: "bot",\
+// &#x20;     text: "Hi! 💗 I'm here to listen. How are you feeling today?",\
+// &#x20;   },\
+// &#x20; ]);\
+// \
+// &#x20; const [input, setInput] = useState("");\
+// &#x20; const chatEndRef = useRef(null);\
+// \
+// &#x20; useEffect(() => {\
+// &#x20;   chatEndRef.current?.scrollIntoView({\
+// &#x20;     behavior: "smooth",\
+// &#x20;   });\
+// &#x20; }, [messages]);\
+// \
+// &#x20; const sendMessage = (e) => {\
+// &#x20;   e.preventDefault();\
+// \
+// &#x20;   const text = input.trim();\
+// &#x20;   if (!text) return;\
+// \
+// &#x20;   setMessages((previous) => [\
+// &#x20;     ...previous,\
+// &#x20;     { role: "user", text },\
+// &#x20;     {\
+// &#x20;       role: "bot",\
+// &#x20;       text: "Thank you for sharing that with me. 💗 Would you like to tell me a little more about what's on your mind?",\
+// &#x20;     },\
+// &#x20;   ]);\
+// \
+// &#x20;   setInput("");\
+// &#x20; };\
+// \
+// &#x20; const formattedDate = selectedDate\
+// &#x20;   ? new Date(\`${selectedDate}T12:00:00\`).toLocaleDateString("en-GB", {\
+// &#x20;       day: "2-digit",\
+// &#x20;       month: "2-digit",\
+// &#x20;       year: "numeric",\
+// &#x20;     })\
+// &#x20;   : new Date().toLocaleDateString("en-GB");\
+// \
+// &#x20; const formattedTime = new Date().toLocaleTimeString();\
+// \
+// &#x20; return (\
+// &#x20;   \<section className="mood-chatbot">\
+// &#x20;     \<div className="chatbot-current-mood">\
+// &#x20;       \<div className="chatbot-header">\
+// &#x20;         \<p className="chatbot-date">{formattedDate}\</p>\
+// &#x20;         \<p className="chatbot-time">{formattedTime}\</p>\
+// &#x20;       \</div>\
+// \
+// &#x20;       \<p className="current-mood-label">Current Mood\</p>\
+// &#x20;       \<span className="current-mood-value">\
+// &#x20;         {currentMood || "Not recorded"}\
+// &#x20;       \</span>\
+// &#x20;     \</div>\
+// \
+// &#x20;     \<div className="chatbot-messages" aria-live="polite">\
+// &#x20;       {messages.map((message, index) => (\
+// &#x20;         \<div\
+// &#x20;           key={index}\
+// &#x20;           className={\`chatbot-message-row ${\
+// &#x20;             message.role === "user" ? "user-message-row" : "bot-message-row"\
+// &#x20;           }\`}\
+// &#x20;         \>\
+// &#x20;           \<p\
+// &#x20;             className={\`chatbot-message ${\
+// &#x20;               message.role === "user" ? "user-message" : "bot-message"\
+// &#x20;             }\`}\
+// &#x20;           \>\
+// &#x20;             {message.text}\
+// &#x20;           \</p>\
+// &#x20;         \</div>\
+// &#x20;       ))}\
+// &#x20;       \<div ref={chatEndRef} />\
+// &#x20;     \</div>\
+// \
+// &#x20;     \<form onSubmit={sendMessage} className="chatbot-form">\
+// &#x20;       \<input\
+// &#x20;         type="text"\
+// &#x20;         value={input}\
+// &#x20;         onChange={(e) => setInput(e.target.value)}\
+// &#x20;         placeholder="Type a message..."\
+// &#x20;         aria-label="Chat message"\
+// &#x20;         className="chatbot-input"\
+// &#x20;       />\
+// &#x20;       \<button type="submit" className="chatbot-send-btn">\
+// &#x20;         Send\
+// &#x20;       \</button>\
+// &#x20;     \</form>\
+// \
+// &#x20;     \<div className="chatbot-footer">\
+// &#x20;       \<h3>Feel Better? ♡\</h3>\
+// &#x20;       \<p>\
+// &#x20;         Remember, every feeling is valid. You can take things one step at a\
+// &#x20;         time.\
+// &#x20;       \</p>\
+// &#x20;     \</div>\
+// &#x20;   \</section>\
+// &#x20; );\
+// };\
+// \
+// export default MoodChatbot;\
+// calendar.css\
+// /\* ========================================\
+// &#x20;  1\. MAIN CALENDAR LAYOUT\
+// \======================================== \*/\
+// .mood-calendar-card {\
+// &#x20; width: 100%;\
+// &#x20; /\* max-width: 95%; \*/\
+// &#x20; box-sizing: border-box;\
+// &#x20; margin: 35px auto;\
+// &#x20; padding: 28px;\
+// &#x20; background: #fff;\
+// &#x20; border: 2px dashed #f3aeb2;\
+// &#x20; border-radius: 24px;\
+// &#x20; box-shadow: 0 8px 28px rgba(53, 71, 71, 0.07);\
+// &#x20; color: #354747;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// }\
+// .mood-calendar {\
+// &#x20; width: 100%;\
+// &#x20; min-width: 0;\
+// }\
+// /\* ========================================\
+// &#x20;  2\. CALENDAR TOOLBAR\
+// \======================================== \*/\
+// .mood-calendar .fc-header-toolbar {\
+// &#x20; display: flex;\
+// &#x20; flex-wrap: wrap;\
+// &#x20; align-items: center;\
+// &#x20; gap: 12px;\
+// &#x20; margin-bottom: 24px;\
+// }\
+// .mood-calendar {\
+// &#x20; display: flex;\
+// &#x20; align-items: center;\
+// }\
+// .fc-button-group {\
+// &#x20; gap: 8px !important;\
+// }\
+// /\* Calendar title \*/\
+// .mood-calendar .fc-toolbar-title {\
+// &#x20; color: #df5462;\
+// &#x20; font-family: "Schoolbell", cursive;\
+// &#x20; font-size: 32px;\
+// &#x20; font-weight: normal;\
+// }\
+// /\* Calendar buttons \*/\
+// .mood-calendar .fc-button-primary {\
+// &#x20; border: 1px solid #f3aeb2 !important;\
+// &#x20; border-radius: 10px !important;\
+// &#x20; background: #f3aeb2 !important;\
+// &#x20; color: #fdf3f3 !important;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 13px;\
+// &#x20; box-shadow: none !important;\
+// &#x20; transition:\
+// &#x20;   background 0.2s ease,\
+// &#x20;   transform 0.2s ease;\
+// }\
+// .mood-calendar .fc-button-primary:hover {\
+// &#x20; border-color: #eb8189 !important;\
+// &#x20; background: #eb8189 !important;\
+// &#x20; color: #253b30 !important;\
+// &#x20; transform: translateY(-1px);\
+// }\
+// .mood-calendar .fc-button-primary:focus {\
+// &#x20; box-shadow: 0 0 0 3px rgba(235, 129, 137, 0.8) !important;\
+// }\
+// .mood-calendar .fc-button-primary:disabled {\
+// &#x20; opacity: 0.55;\
+// }\
+// /\* ========================================\
+// &#x20;  3\. WEEKDAY HEADINGS\
+// \======================================== \*/\
+// .mood-calendar .fc-col-header-cell {\
+// &#x20; padding: 12px 4px;\
+// &#x20; background: #f1f7eb;\
+// }\
+// .mood-calendar .fc-col-header-cell-cushion {\
+// &#x20; color: #eb8189;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 13px;\
+// &#x20; font-weight: 600;\
+// &#x20; text-decoration: none;\
+// }\
+// /\* ========================================\
+// &#x20;  4\. CALENDAR DAY CELLS\
+// \======================================== \*/\
+// .mood-calendar .fc-daygrid-day {\
+// &#x20; background: #fff;\
+// &#x20; transition: background 0.2s ease;\
+// }\
+// .mood-calendar .fc-daygrid-day:hover {\
+// &#x20; background: #fff8f8;\
+// &#x20; cursor: pointer;\
+// }\
+// .mood-calendar .fc-daygrid-day-frame {\
+// &#x20; position: relative;\
+// &#x20; display: flex;\
+// &#x20; flex-direction: column;\
+// &#x20; min-height: 90px;\
+// }\
+// .mood-calendar .fc-daygrid-day-number {\
+// &#x20; position: relative;\
+// &#x20; z-index: 2;\
+// &#x20; align-self: flex-end;\
+// &#x20; padding: 8px;\
+// &#x20; color: #eb8189;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 13px;\
+// &#x20; text-decoration: none;\
+// }\
+// /\* Highlight today's date \*/\
+// .mood-calendar .fc-day-today {\
+// &#x20; background: #fce7e7 !important;\
+// &#x20; color: #53615e !important;\
+// }\
+// .mood-calendar .fc-day-today .fc-daygrid-day-number {\
+// &#x20; color: #eb8189 !important;\
+// &#x20; font-weight: 600;\
+// }\
+// /\* ========================================\
+// &#x20;  5\. MOOD EMOJI EVENTS\
+// \======================================== \*/\
+// /\* Make calendar events clickable \*/\
+// .mood-calendar .fc-event {\
+// &#x20; cursor: pointer;\
+// }\
+// /\* Let the event area fill available cell space \*/\
+// .mood-calendar .fc-daygrid-day-events {\
+// &#x20; display: flex;\
+// &#x20; flex: 1;\
+// &#x20; flex-direction: column;\
+// &#x20; min-height: 0;\
+// &#x20; margin: 0 !important;\
+// }\
+// .mood-calendar .fc-daygrid-event-harness {\
+// &#x20; display: flex;\
+// &#x20; flex: 1;\
+// &#x20; min-height: 0;\
+// }\
+// .mood-calendar .fc-daygrid-event {\
+// &#x20; display: flex !important;\
+// &#x20; flex: 1;\
+// &#x20; align-items: center;\
+// &#x20; justify-content: center;\
+// &#x20; width: 100%;\
+// &#x20; min-height: 0;\
+// &#x20; margin: 0 !important;\
+// &#x20; padding: 0;\
+// &#x20; border: none !important;\
+// &#x20; border-radius: 0;\
+// &#x20; background: transparent !important;\
+// &#x20; box-shadow: none !important;\
+// &#x20; text-align: center;\
+// }\
+// .mood-calendar .fc-event-main {\
+// &#x20; display: flex;\
+// &#x20; flex: 1;\
+// &#x20; align-items: center;\
+// &#x20; justify-content: center;\
+// &#x20; width: 100%;\
+// &#x20; height: 100%;\
+// }\
+// .mood-calendar .fc-event-title {\
+// &#x20; display: flex;\
+// &#x20; align-items: center;\
+// &#x20; justify-content: center;\
+// &#x20; width: 100%;\
+// &#x20; height: 100%;\
+// &#x20; font-size: 32px;\
+// &#x20; line-height: 1;\
+// &#x20; white-space: normal;\
+// }\
+// /\* Hide FullCalendar's default event dot \*/\
+// .mood-calendar .fc-daygrid-event-dot {\
+// &#x20; display: none;\
+// }\
+// /\* ========================================\
+// &#x20;  6\. CALENDAR INSTRUCTIONS\
+// \======================================== \*/\
+// .calendar-instruction {\
+// &#x20; display: block;\
+// &#x20; width: 100%;\
+// &#x20; margin: 16px auto 0;\
+// &#x20; text-align: center;\
+// &#x20; font-size: 14px;\
+// &#x20; box-sizing: border-box;\
+// &#x20; color: #eb8189;\
+// }\
+// /\* ========================================\
+// &#x20;  7\. NOTE POPUP OVERLAY\
+// \======================================== \*/\
+// .note-popup-overlay {\
+// &#x20; position: fixed;\
+// &#x20; inset: 0;\
+// &#x20; z-index: 2000;\
+// &#x20; display: flex;\
+// &#x20; align-items: center;\
+// &#x20; justify-content: center;\
+// &#x20; padding: 20px;\
+// &#x20; background: rgba(53, 71, 71, 0.35);\
+// &#x20; backdrop-filter: blur(4px);\
+// }\
+// /\* ========================================\
+// &#x20;  8\. NOTE POPUP WINDOW\
+// \======================================== \*/\
+// .note-popup {\
+// &#x20; position: relative;\
+// &#x20; width: 100%;\
+// &#x20; max-width: 380px;\
+// &#x20; box-sizing: border-box;\
+// &#x20; padding: 30px 26px;\
+// &#x20; border: 2px solid #e4eddf;\
+// &#x20; border-radius: 24px;\
+// &#x20; background: #fffdf8;\
+// &#x20; box-shadow: 0 12px 40px rgba(53, 71, 71, 0.18);\
+// &#x20; text-align: center;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; animation: note-popup-appear 0.2s ease-out;\
+// }\
+// .note-popup-emoji {\
+// &#x20; margin-bottom: 8px;\
+// &#x20; font-size: 42px;\
+// }\
+// .note-popup h3 {\
+// &#x20; margin: 0 0 8px;\
+// &#x20; color: #77c981;\
+// &#x20; font-family: "Schoolbell", cursive;\
+// &#x20; font-size: 30px;\
+// &#x20; font-weight: normal;\
+// }\
+// .note-popup-date {\
+// &#x20; margin: 0 0 18px;\
+// &#x20; color: #82918a;\
+// &#x20; font-size: 13px;\
+// }\
+// .note-popup-text {\
+// &#x20; max-height: 220px;\
+// &#x20; overflow-y: auto;\
+// &#x20; padding: 16px;\
+// &#x20; border-radius: 14px;\
+// &#x20; background: #f1f7eb;\
+// &#x20; color: #354747;\
+// &#x20; font-size: 15px;\
+// &#x20; line-height: 1.7;\
+// &#x20; text-align: left;\
+// &#x20; white-space: pre-wrap;\
+// &#x20; overflow-wrap: anywhere;\
+// }\
+// /\* ========================================\
+// &#x20;  9\. NOTE POPUP BUTTONS\
+// \======================================== \*/\
+// /\* Close icon \*/\
+// .note-popup-close {\
+// &#x20; position: absolute;\
+// &#x20; top: 10px;\
+// &#x20; right: 14px;\
+// &#x20; border: none;\
+// &#x20; background: transparent;\
+// &#x20; color: #82918a;\
+// &#x20; font-size: 28px;\
+// &#x20; cursor: pointer;\
+// }\
+// /\* Close button \*/\
+// .note-popup-button {\
+// &#x20; margin-top: 20px;\
+// &#x20; padding: 10px 26px;\
+// &#x20; border: none;\
+// &#x20; border-radius: 12px;\
+// &#x20; background: #df5462;\
+// &#x20; color: #fff;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 14px;\
+// &#x20; cursor: pointer;\
+// &#x20; transition:\
+// &#x20;   background 0.2s ease,\
+// &#x20;   transform 0.2s ease;\
+// }\
+// .note-popup-button:hover {\
+// &#x20; background: #c94553;\
+// &#x20; transform: translateY(-2px);\
+// }\
+// /\* ========================================\
+// &#x20;  10\. TABLET RESPONSIVE DESIGN\
+// \======================================== \*/\
+// @media (max-width: 768px) {\
+// &#x20; .mood-calendar-card {\
+// &#x20;   width: 94%;\
+// &#x20;   padding: 20px 14px;\
+// &#x20;   border-radius: 20px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-toolbar-title {\
+// &#x20;   font-size: 27px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-toolbar {\
+// &#x20;   gap: 10px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-button-primary {\
+// &#x20;   padding: 6px 9px;\
+// &#x20;   font-size: 12px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-daygrid-day-frame {\
+// &#x20;   min-height: 70px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-daygrid-event,\
+// &#x20; .mood-calendar .fc-event-title {\
+// &#x20;   font-size: 17px;\
+// &#x20; }\
+// }\
+// /\* ========================================\
+// &#x20;  11\. MOBILE RESPONSIVE DESIGN\
+// \======================================== \*/\
+// @media (max-width: 480px) {\
+// &#x20; .mood-calendar-card {\
+// &#x20;   width: 96%;\
+// &#x20;   margin: 20px auto;\
+// &#x20;   padding: 14px 8px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-header-toolbar {\
+// &#x20;   justify-content: center;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-toolbar-title {\
+// &#x20;   font-size: 23px;\
+// &#x20;   text-align: center;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-col-header-cell-cushion {\
+// &#x20;   font-size: 11px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-daygrid-day-frame {\
+// &#x20;   min-height: 55px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-daygrid-day-number {\
+// &#x20;   padding: 5px 3px;\
+// &#x20;   font-size: 11px;\
+// &#x20; }\
+// &#x20; .mood-calendar .fc-daygrid-event,\
+// &#x20; .mood-calendar .fc-event-title {\
+// &#x20;   font-size: 14px;\
+// &#x20; }\
+// &#x20; .calendar-instruction {\
+// &#x20;   font-size: 12px;\
+// &#x20; }\
+// }\
+// /\* ========================================\
+// &#x20;  12\. KEYBOARD ACCESSIBILITY\
+// \======================================== \*/\
+// .mood-calendar .fc-daygrid-day:focus-within {\
+// &#x20; outline: 2px solid #77c981;\
+// &#x20; outline-offset: -2px;\
+// }\
+// /\* ========================================\
+// &#x20;  13\. POPUP ANIMATION\
+// \======================================== \*/\
+// @keyframes note-popup-appear {\
+// &#x20; from {\
+// &#x20;   opacity: 0;\
+// &#x20;   transform: translateY(8px) scale(0.97);\
+// &#x20; }\
+// &#x20; to {\
+// &#x20;   opacity: 1;\
+// &#x20;   transform: translateY(0) scale(1);\
+// &#x20; }\
+// }\
+// /\* ========================================\
+// &#x20;  14\. REDUCED MOTION ACCESSIBILITY\
+// \======================================== \*/\
+// @media (prefers-reduced-motion: reduce) {\
+// &#x20; .mood-calendar .fc-button-primary,\
+// &#x20; .mood-calendar .fc-daygrid-day,\
+// &#x20; .note-popup-button,\
+// &#x20; .note-popup {\
+// &#x20;   animation: none;\
+// &#x20;   transition: none;\
+// &#x20; }\
+// }\
+// cal_layout.css\
+// /\* Calendar and chatbot layout \*/\
+// .calendar-chat-layout {\
+// &#x20; display: grid;\
+// &#x20; grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);\
+// &#x20; align-items: start;\
+// &#x20; gap: 24px;\
+// &#x20; width: 100%;\
+// &#x20; /\* max-width: 1280px; \*/\
+// &#x20; margin: 0 auto;\
+// &#x20; padding: 0 16px;\
+// &#x20; box-sizing: border-box;\
+// }\
+// \
+// /\* Prevent children from overflowing their columns \*/\
+// .calendar-chat-layout > \* {\
+// &#x20; min-width: 0;\
+// }\
+// \
+// /\* ========================================\
+// &#x20;  CALENDAR PAGE TEXT\
+// \======================================== \*/\
+// \
+// /\* Main page heading \*/\
+// .calendar-page-title {\
+// &#x20; margin: 64px 0 32px;\
+// &#x20; color: #77c981;\
+// &#x20; font-family: "Schoolbell", cursive;\
+// &#x20; font-size: 36px;\
+// &#x20; font-weight: 700;\
+// &#x20; line-height: 1.3;\
+// &#x20; text-align: center;\
+// }\
+// \
+// /\* Feature card headings \*/\
+// .calendar-feature-title {\
+// &#x20; margin: 0 0 8px;\
+// &#x20; color: #ec6690 !important;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 20px;\
+// &#x20; font-weight: 500;\
+// &#x20; line-height: 1.4;\
+// }\
+// \
+// /\* Feature card descriptions \*/\
+// .calendar-feature-text {\
+// &#x20; margin: 0;\
+// &#x20; color: #4b5563;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 14px;\
+// &#x20; font-weight: 400;\
+// &#x20; line-height: 1.7;\
+// }\
+// \
+// /\* Mental health support link \*/\
+// .calendar-support-link {\
+// &#x20; display: inline-block;\
+// &#x20; margin-top: 8px;\
+// &#x20; color: #ec6690;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 14px;\
+// &#x20; text-decoration: underline;\
+// &#x20; text-underline-offset: 3px;\
+// &#x20; transition: color 0.2s ease;\
+// }\
+// \
+// .calendar-support-link:hover {\
+// &#x20; color: #c94570;\
+// }\
+// \
+// /\* Footer \*/\
+// .calendar-footer {\
+// &#x20; margin-top: 48px;\
+// &#x20; color: #6b7280;\
+// &#x20; font-family: "Sniglet", sans-serif;\
+// &#x20; font-size: 14px;\
+// &#x20; line-height: 1.8;\
+// &#x20; text-align: center;\
+// }\
+// \
+// .calendar-footer p {\
+// &#x20; margin: 4px 0;\
+// }\
+// \
+// /\* Back to top \*/\
+// .calendar-back-to-top {\
+// &#x20; display: inline-block;\
+// &#x20; margin-top: 12px;\
+// }\
+// \
+// .calendar-back-to-top img {\
+// &#x20; display: block;\
+// &#x20; width: 48px;\
+// &#x20; height: 48px;\
+// &#x20; object-fit: contain;\
+// &#x20; transition: transform 0.2s ease;\
+// }\
+// \
+// .calendar-back-to-top:hover img {\
+// &#x20; transform: translateY(-3px);\
+// }\
+// \
+// /\* ========================================\
+// &#x20;  RESPONSIVE TEXT\
+// \======================================== \*/\
+// \
+// @media (max-width: 768px) {\
+// &#x20; .calendar-page-title {\
+// &#x20;   margin-top: 48px;\
+// &#x20;   font-size: 30px;\
+// &#x20; }\
+// \
+// &#x20; .calendar-feature-title {\
+// &#x20;   font-size: 18px;\
+// &#x20; }\
+// }\
+// \
+// @media (max-width: 480px) {\
+// &#x20; .calendar-page-title {\
+// &#x20;   margin: 40px 0 24px;\
+// &#x20;   font-size: 25px;\
+// &#x20; }\
+// \
+// &#x20; .calendar-feature-text,\
+// &#x20; .calendar-support-link {\
+// &#x20;   font-size: 13px;\
+// &#x20; }\
+// \
+// &#x20; .calendar-footer {\
+// &#x20;   margin-top: 36px;\
+// &#x20;   font-size: 12px;\
+// &#x20; }\
+// }\
+// \
+// /\* Tablet and mobile \*/\
+// @media (max-width: 768px) {\
+// &#x20; .calendar-chat-layout {\
+// &#x20;   grid-template-columns: 1fr;\
+// &#x20;   gap: 24px;\
+// &#x20;   padding: 0 8px;\
+// &#x20; }\
+// }\

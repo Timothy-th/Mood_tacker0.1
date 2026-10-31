@@ -1,0 +1,289 @@
+/* ========================================
+   MOOD GARDEN NAVBAR
+======================================== */
+
+#to-top.mood-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  width: 100%;
+  min-height: 64px;
+  margin: 0;
+  padding: 8px 32px;
+
+  background-color: #aad480;
+  border-bottom: 1px solid #e0eee4;
+  box-shadow: 0 2px 8px rgba(53, 71, 71, 0.06);
+  box-sizing: border-box;
+}
+
+/* Logo */
+
+.mood-navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+
+  margin: 0;
+  padding: 0;
+
+  color: #fdfce0;
+  text-decoration: none;
+}
+
+.mood-navbar__brand img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+}
+
+.mood-navbar__brand-name {
+  margin: 0;
+  color: #fdfce0;
+  font-size: 23px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Desktop navigation */
+
+.mood-navbar__menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+  margin-left: auto;
+}
+
+.mood-navbar__menu ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 4px;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mood-navbar__menu li {
+  margin: 0;
+  padding: 0;
+}
+
+.mood-navbar__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  color: #fdfce0;
+  font-family: "Sniglet", sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: color 0.2s ease;
+}
+
+/* Underline animation */
+
+.mood-navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+
+  height: 2px;
+  border-radius: 2px;
+  background-color: #df5462;
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.mood-navbar__link:hover,
+.mood-navbar__link.active {
+  color: #df5462;
+}
+
+.mood-navbar__link:hover::after,
+.mood-navbar__link.active::after {
+  transform: scaleX(1);
+}
+
+/* Hamburger button */
+
+.mood-navbar__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #354747;
+
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mood-navbar__toggle:hover {
+  background-color: rgba(253, 252, 224, 0.4);
+}
+
+/* Keyboard accessibility */
+
+.mood-navbar__toggle:focus-visible,
+.mood-navbar__link:focus-visible,
+.mood-navbar__brand:focus-visible {
+  outline: 2px solid #df5462;
+  outline-offset: 3px;
+}
+
+/* ========================================
+   MOBILE NAVIGATION
+======================================== */
+
+@media (max-width: 767px) {
+  #to-top.mood-navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0;
+    min-height: 58px;
+    padding: 8px 16px;
+  }
+
+  .mood-navbar__brand {
+    gap: 8px;
+  }
+
+  .mood-navbar__brand img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mood-navbar__brand-name {
+    font-size: 21px;
+  }
+
+  .mood-navbar__toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .mood-navbar__menu {
+    display: none;
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0;
+    padding: 8px 0 4px;
+  }
+
+  .mood-navbar__menu.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mood-navbar__menu ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px;
+    width: 100%;
+  }
+
+  .mood-navbar__menu li {
+    width: 100%;
+  }
+
+  .mood-navbar__link {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+  }
+
+  .mood-navbar__link::after {
+    display: none;
+  }
+
+  .mood-navbar__link.active {
+    background-color: rgba(253, 252, 224, 0.45);
+  }
+}
+
+/* Extra-small screens */
+
+@media (max-width: 360px) {
+  #to-top.mood-navbar {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .mood-navbar__brand {
+    gap: 6px;
+  }
+
+  .mood-navbar__brand-name {
+    font-size: 19px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .mood-navbar__link,
+  .mood-navbar__link::after {
+    transition: none;
+  }
+}
+.mood-navbar__logout {
+  border: 1px solid #df5462;
+  border-radius: 12px;
+  padding: 8px 16px;
+  background: #df5462;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.mood-navbar__logout:hover {
+  background: #c94553;
+  transform: translateY(-2px);
+}
+
+.mood-navbar__logout:focus-visible {
+  outline: 3px solid #77c981;
+  outline-offset: 3px;
+}

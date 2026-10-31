@@ -1,0 +1,102 @@
+.weekly-mood-card {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e5efdc;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(53, 71, 71, 0.06);
+  font-family: "Sniglet", sans-serif;
+}
+
+.weekly-mood-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.weekly-mood-heading h2 {
+  margin: 0;
+  color: #354747;
+  font-family: "Schoolbell", cursive;
+  font-size: 25px;
+}
+
+.weekly-mood-heading p {
+  margin: 6px 0 0;
+  color: #858c8c;
+  font-size: 13px;
+}
+
+.weekly-mood-heading span {
+  flex-shrink: 0;
+  padding: 7px 12px;
+  color: #d96573;
+  background: #fff1f2;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.weekly-mood-chart {
+  width: 100%;
+  height: 240px;
+}
+
+.weekly-mood-tooltip {
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1px solid #f3cbd0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(53, 71, 71, 0.1);
+}
+
+.weekly-mood-tooltip p {
+  margin: 0 0 5px;
+  color: #858c8c;
+  font-size: 11px;
+}
+
+.weekly-mood-tooltip strong {
+  color: #df5462;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.weekly-mood-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  color: #858c8c;
+}
+
+.weekly-mood-empty span {
+  font-size: 35px;
+}
+
+.weekly-mood-empty p {
+  margin: 10px 0 5px;
+  color: #354747;
+}
+
+.weekly-mood-empty small {
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+  .weekly-mood-card {
+    padding: 16px;
+  }
+
+  .weekly-mood-heading h2 {
+    font-size: 21px;
+  }
+
+  .weekly-mood-chart {
+    height: 210px;
+  }
+}
