@@ -39,9 +39,14 @@ export default async function handler(req, res) {
     const apiKey = process.env.OPENROUTER_API_KEY;
     const model = process.env.OPENROUTER_MODEL;
 
-    if (!apiKey || !model) {
+    const missing = [];
+
+    if (!apiKey) missing.push("OPENROUTER_API_KEY");
+    if (!model) missing.push("OPENROUTER_MODEL");
+
+    if (missing.length > 0) {
       return res.status(500).json({
-        error: "AI environment variables are missing.",
+        error: `Missing environment variables: ${missing.join(", ")}`,
       });
     }
 
