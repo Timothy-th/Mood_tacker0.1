@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Footer from "../components/Footer";
 import "../styles/global.css";
 import "../styles/profile.css";
 
@@ -14,6 +15,13 @@ const Profile = () => {
   const [bioText, setBioText] = useState("");
   const [draftTitle, setDraftTitle] = useState("");
   const [draftBio, setDraftBio] = useState("");
+
+  const handleBackToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   // Reload the avatar when the user returns to this route
   // Reload the latest saved avatar whenever you return to Profile
@@ -98,28 +106,20 @@ const Profile = () => {
   };
 
   return (
-    <div className="container">
-      <div className="upper-section">
-        <div className="bg-cover">
-          {/* Bio content on the left */}
-          <div className="profile-bio">
-            {bioTitle || bioText ? (
-              <>
-                {bioTitle && <h2 className="profile-bio-title">{bioTitle}</h2>}
-                {bioText && <p className="profile-bio-text">{bioText}</p>}
-              </>
-            ) : (
-              <p className="profile-bio-placeholder">
-                Your little corner of the world ♡
-              </p>
-            )}
+    <>
+      <div className="profile-page">
+        <div className="upper-section">
+          <div className="bg-cover">
+            <div className="cover-image-wrapper">
+              <img
+                src="/images/profile-cover.png"
+                alt="Profile cover"
+                className="profile-cover-image"
+              />
+            </div>
           </div>
 
-          {/* Add Bio button */}
-          <button type="button" className="add-bio-btn" onClick={openBioModal}>
-            {bioTitle || bioText ? "✎ Edit Bio" : "+ Add Bio"}
-          </button>
-
+          {/* Avatar */}
           <div className="out_pro">
             <button
               type="button"
@@ -171,6 +171,7 @@ const Profile = () => {
                       />
                     )}
                   </div>
+
                   <div className="avatar-hover-overlay">
                     <span>✎</span>
                     <span>Edit your avatar</span>
@@ -184,57 +185,137 @@ const Profile = () => {
               )}
             </button>
           </div>
-        </div>
 
-        {/* Popup window */}
+          {/* Bio below avatar */}
+          <div className="profile-bio-section">
+            <div className="profile-bio">
+              {bioTitle || bioText ? (
+                <>
+                  {bioTitle && (
+                    <h2 className="profile-bio-title">{bioTitle}</h2>
+                  )}
+                  {bioText && <p className="profile-bio-text">{bioText}</p>}
+                </>
+              ) : (
+                <p className="profile-bio-placeholder">
+                  Your little corner of the world ♡
+                </p>
+              )}
+            </div>
+
+            <button
+              type="button"
+              className="add-bio-btn"
+              onClick={openBioModal}
+            >
+              {bioTitle || bioText ? "Edit Bio" : "+ Add Bio"}
+            </button>
+          </div>
+        </div>
+        {/* Current Development */}
+        <section className="current-section">
+          <div className="section-heading">
+            <span className="section-subtitle">A little world in progress</span>
+            <h2>Current & Future Features ♡</h2>
+            <p>Little things I'm dreaming of bringing to life.</p>
+          </div>
+
+          <div className="feature-grid">
+            <article className="feature-card">
+              <img
+                src="/images/garden-feature.png"
+                alt="Cozy garden and home decoration"
+              />
+              <div className="feature-card-content">
+                <span className="feature-status">Planned feature</span>
+                <h3>Garden & Home Life 🌸</h3>
+                <p>
+                  Grow your own little garden, decorate your home, arrange
+                  furniture, and enjoy cozy activities like cooking.
+                </p>
+              </div>
+            </article>
+
+            <article className="feature-card">
+              <img
+                src="/images/multiplayer-feature.png"
+                alt="Cozy multiplayer virtual world"
+              />
+              <div className="feature-card-content">
+                <span className="feature-status">Future project</span>
+                <h3>A Cozy Little World 🏡</h3>
+                <p>
+                  A small multiplayer life-simulation world where you can invite
+                  friends, meet up, chat, play games, and enjoy everyday
+                  activities together.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          {/* Project Purpose */}
+          <div className="project-purpose">
+            <div className="purpose-icon">
+              <img
+                src="/public/icons/doodle-color-20-heart-in-reveal.gif"
+                alt="heart"
+              />
+            </div>
+            <span className="section-subtitle">The reason behind it all</span>
+            <h2>A Little World We Can Call Home</h2>
+            <p>
+              I want to create a little cozy virtual world where distance
+              doesn't have to keep people apart. A place where friends, lovers,
+              and families who live far away can come together, share a home,
+              chat about their days, play games, and enjoy the little things in
+              life.
+            </p>
+            <p>
+              More than just a game or a mood tracker, I hope this project can
+              become a comforting space where people can create memories
+              together, even when they can't be physically by each other's side.
+            </p>
+          </div>
+        </section>
+        {/* Bio Modal */}
         {showBioModal && (
           <div
             className="bio-modal-overlay"
             onClick={() => setShowBioModal(false)}
           >
-            <div
-              className="bio-modal"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="bio-modal-title"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="bio-modal" onClick={(e) => e.stopPropagation()}>
               <button
                 type="button"
                 className="bio-modal-close"
                 onClick={() => setShowBioModal(false)}
-                aria-label="Close popup"
               >
                 ×
               </button>
 
-              <h2 id="bio-modal-title">
-                {bioTitle || bioText ? "Edit Your Bio ♡" : "Add Your Bio ♡"}
-              </h2>
-
+              <h2>Edit Your Bio ♡</h2>
               <p className="bio-modal-subtitle">
-                A little introduction about you.
+                Tell everyone a little about your world.
               </p>
 
               <form onSubmit={saveBio}>
-                <label htmlFor="bio-title-input">Title</label>
+                <label htmlFor="bio-title">Your title</label>
                 <input
-                  id="bio-title-input"
+                  id="bio-title"
                   type="text"
-                  placeholder="e.g. A little dreamer"
+                  placeholder="Give your little world a title..."
                   value={draftTitle}
                   onChange={(e) => setDraftTitle(e.target.value)}
                   maxLength={60}
                 />
 
-                <label htmlFor="bio-text-input">Bio</label>
+                <label htmlFor="bio-text">About you</label>
                 <textarea
-                  id="bio-text-input"
-                  placeholder="Tell us a little about yourself..."
+                  id="bio-text"
+                  placeholder="Write something about yourself..."
                   value={draftBio}
                   onChange={(e) => setDraftBio(e.target.value)}
-                  rows={4}
-                  maxLength={300}
+                  rows={5}
+                  maxLength={500}
                 />
 
                 <div className="bio-modal-actions">
@@ -254,39 +335,22 @@ const Profile = () => {
             </div>
           </div>
         )}
+        {/* Back to Top */}
+        <div className="calendar-back-to-top">
+          <button
+            type="button"
+            onClick={handleBackToTop}
+            aria-label="Back to top"
+          >
+            <img
+              src="/icons/wired-lineal-259-share-square-arrow-in-reveal.gif"
+              alt="to top"
+            />
+          </button>
+        </div>
       </div>
-
-      <div className="middle-section"></div>
-
-      <div className="lower-section"></div>
-    </div>
-    // <div className="container">
-    //   <div className="upper_section">
-    //     <div className="leftUp">
-    //       <div className="bio">
-    //         {bio && <p className="profile-bio">{bio}</p>}
-    //       </div>
-
-    //       <div className="bpGroup">
-    //
-
-    //         <button className="bio-btn" onClick={handleBio}>
-    //           {bio ? "Edit Bio" : "Add Bio"}
-    //         </button>
-    //         <div className="update"></div>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    //   <div className="middle_section">
-    //     <div className="chat"></div>
-    //     <div className="graph"></div>
-    //   </div>
-
-    //   <div className="lower_section">
-    //     <div className="home"></div>
-    //   </div>
-    // </div>
+      <Footer />
+    </>
   );
 };
 

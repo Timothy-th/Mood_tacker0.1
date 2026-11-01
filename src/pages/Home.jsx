@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import WeeklyMoodChart from "../components/home/WeeklyMoodChart";
+import Footer from "../components/Footer";
 import "../styles/home.css";
 
 const Home = () => {
@@ -12,6 +13,13 @@ const Home = () => {
   }
 
   const userName = user?.name || user?.username || "Friend";
+
+  const handleBackToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <main className="home-page">
@@ -39,9 +47,15 @@ const Home = () => {
 
         <div className="hero-decoration">
           <div className="hero-circle">
-            <span>🌷</span>
+            <span>
+              <img
+                src="/public/icons/wired-lineal-1704-flower-in-reveal.gif"
+                alt="Animated heart"
+                className="mood-icon"
+              />
+            </span>
           </div>
-          <span className="hero-flower flower-one">🌼</span>
+          <span className="hero-flower flower-one">🌸</span>
           <span className="hero-flower flower-two">🌸</span>
           <span className="hero-flower flower-three">🍃</span>
           <span className="hero-sparkle sparkle-one">✦</span>
@@ -87,7 +101,12 @@ const Home = () => {
                 src="/images/feeling-card.png"
                 alt="A cozy illustration representing emotions and journaling"
               />
-              <span className="quick-link-icon">🌷</span>
+              <span className="quick-link-icon">
+                <img
+                  src="/public/icons/wired-lineal-1845-rose-in-reveal.gif"
+                  alt="rose"
+                />
+              </span>
             </div>
 
             <div className="quick-link-content">
@@ -95,7 +114,7 @@ const Home = () => {
               <h3>How are you feeling?</h3>
               <p>
                 Take a moment to check in with yourself and record your current
-                emotion.
+                emotion for your daily life.
               </p>
               <span className="quick-link-action">
                 Choose your feeling <span>→</span>
@@ -110,7 +129,12 @@ const Home = () => {
                 src="/images/profile-card.png"
                 alt="A cozy illustrated personal garden"
               />
-              <span className="quick-link-icon">🪴</span>
+              <span className="quick-link-icon">
+                <img
+                  src="/public/icons/doodle-color-1732-plant-pot-in-reveal.gif"
+                  alt="pot"
+                />
+              </span>
             </div>
 
             <div className="quick-link-content">
@@ -143,35 +167,23 @@ const Home = () => {
 
         <WeeklyMoodChart />
       </section>
+      {/* WEEKLY GRAPH */}
 
-      {/* FOOTER */}
-      <footer className="home-footer">
-        <div className="footer-main">
-          <div className="footer-brand">
-            <h2>
-              Mood Tracker <span>♡</span>
-            </h2>
-            <p>A little place to grow, reflect, and embrace every emotion.</p>
-          </div>
+      {/* Back to Top */}
+      <div className="calendar-back-to-top">
+        <button
+          type="button"
+          onClick={handleBackToTop}
+          aria-label="Back to top"
+        >
+          <img
+            src="/icons/wired-lineal-259-share-square-arrow-in-reveal.gif"
+            alt="to top"
+          />
+        </button>
+      </div>
 
-          <div className="footer-links">
-            <h3>Explore</h3>
-            <Link to="/">Home</Link>
-            <Link to="/feeling">Feeling</Link>
-            <Link to="/ava">Profile</Link>
-          </div>
-
-          <div className="footer-links">
-            <h3>Get in touch</h3>
-            <Link to="/contact">Contact Us</Link>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <p>Made with love ♡</p>
-          <p>© {new Date().getFullYear()} Mood Tracker. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 };

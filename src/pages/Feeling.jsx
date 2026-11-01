@@ -1,4 +1,5 @@
 import ChooseMood from "../components/feeling/ChooseMood";
+import Footer from "../components/Footer";
 import "../styles/feeling.css";
 
 const Feeling = () => {
@@ -13,6 +14,7 @@ const Feeling = () => {
       <div className="mx-auto max-w-6xl">
         <ChooseMood onSubmitMood={handleMoodSubmit} />
       </div>
+      <Footer />
     </main>
   );
 };

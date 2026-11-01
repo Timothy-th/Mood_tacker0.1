@@ -42,6 +42,9 @@ const ChooseMood = ({ onSubmitMood }) => {
 
     localStorage.setItem("moodEntries", JSON.stringify(savedMoods));
 
+    // Notify components that mood entries have changed
+    window.dispatchEvent(new Event("moodEntriesUpdated"));
+
     onSubmitMood?.(moodEntry);
 
     // Navigate to the Calendar page

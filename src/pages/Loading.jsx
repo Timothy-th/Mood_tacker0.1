@@ -6,7 +6,10 @@ const Loading = () => {
     <section className="loading-screen">
       <div className="loading-content">
         <div className="loading-garden-icon" aria-hidden="true">
-          🌱
+          <img
+            src="/public/icons/doodle-color-20-heart-in-reveal.gif"
+            alt="dendelion"
+          />
         </div>
 
         <h1 className="loading-title">Mood Garden</h1>

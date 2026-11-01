@@ -37,64 +37,45 @@ const ContactForm = () => {
       return;
     }
 
-    // UI demonstration only — connect your backend to create an account.
     setSuccess("Your form has been validated successfully!");
   };
 
   const socialLinks = [
     {
       name: "Google",
-      image: "/image/icons8-google-96-removebg-preview.png",
+      image: "/public/icons/wired-lineal-2640-logo-circle-google-in-reveal.gif",
       href: "#",
     },
     {
       name: "Facebook",
-      image: "/image/icons8-facebook-96-removebg-preview.png",
+      image:
+        "/public/icons/wired-lineal-2624-logo-circle-facebook-in-reveal.gif",
       href: "#",
     },
     {
       name: "Twitter",
-      image: "/image/icons8-twitter-circled-96-removebg-preview.png",
+      image:
+        "/public/icons/wired-lineal-2628-logo-circle-twitter-in-reveal.gif",
       href: "#",
     },
     {
       name: "Discord",
-      image: "/image/icons8-discord-96-removebg-preview.png",
+      image:
+        "/public/icons/wired-lineal-2649-logo-circle-discord-in-reveal.gif",
       href: "#",
     },
   ];
 
   return (
     <section className="contact-form-page">
-      {/* Left panel */}
-      <div className="contact-left-panel">
-        <h1 className="contact-main-title">
-          A Message from Your Mood
-          <img
-            src="/image/wired-lineal-1845-rose-hover-pinch.gif"
-            alt="Animated rose"
-            className="contact-rose-animation"
-          />
-        </h1>
+      {/* Left Panel - Background Image */}
+      <div className="contact-left-panel"></div>
 
-        <div id="user-avatar" className="contact-avatar-box">
-          {/* Add your selected avatar here later. */}
-          <p className="contact-avatar-placeholder">
-            Your avatar will appear here ♡
-          </p>
-        </div>
-
-        <p className="contact-description">
-          Every feeling has a story. Take a breath, listen to yourself, and
-          remember that your feelings matter.
-        </p>
-      </div>
-
-      {/* Right panel */}
+      {/* Right Panel - Sign Up Form */}
       <div className="contact-right-panel">
         <h2 className="contact-form-title">Need to Talk? We’re Here</h2>
 
-        {/* Social icons */}
+        {/* Social Icons */}
         <div className="contact-social-links">
           {socialLinks.map((social) => (
             <a
@@ -119,7 +100,7 @@ const ContactForm = () => {
           <div className="contact-divider-line" />
         </div>
 
-        {/* Contact form */}
+        {/* Form */}
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="contact-form-row">
             <input

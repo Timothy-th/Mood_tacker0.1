@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
   LineChart,
@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import "../../styles/weekly_mood.css";
 
 const moodLevels = {
   happy: 5,
@@ -15,9 +16,14 @@ const moodLevels = {
   calm: 4,
   relaxed: 4,
   neutral: 3,
+  bored: 3,
+  confused: 3,
   tired: 2,
   anxious: 2,
   stressed: 2,
+  lonely: 2,
+  guilty: 2,
+  fearful: 1,
   sad: 1,
   angry: 1,
 };
@@ -32,7 +38,7 @@ const getWeeklyData = () => {
   }
 
   const today = new Date();
-  const weekData = [];
+  const result = [];
 
   for (let i = 6; i >= 0; i--) {
     const date = new Date(
@@ -47,14 +53,13 @@ const getWeeklyData = () => {
       String(date.getDate()).padStart(2, "0"),
     ].join("-");
 
-    // Find the latest mood recorded for this day.
     const dailyEntries = entries
       .filter((entry) => entry.date === dateString)
       .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
 
     const mood = dailyEntries[0]?.mood?.toLowerCase() || "";
 
-    weekData.push({
+    result.push({
       date: dateString,
       day: date.toLocaleDateString("en-US", {
         weekday: "short",
@@ -64,7 +69,7 @@ const getWeeklyData = () => {
     });
   }
 
-  return weekData;
+  return result;
 };
 
 const CustomTooltip = ({ active, payload }) => {
@@ -83,7 +88,28 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const WeeklyMoodChart = () => {
-  const data = useMemo(() => getWeeklyData(), []);
+  const [data, setData] = useState(getWeeklyData);
+
+  useEffect(() => {
+    const updateChart = () => {
+      setData(getWeeklyData());
+    };
+
+    // Update when a new mood is saved
+    window.addEventListener("moodEntriesUpdated", updateChart);
+
+    // Update when returning to the browser tab
+    window.addEventListener("focus", updateChart);
+
+    // Update when navigating back to the page
+    window.addEventListener("pageshow", updateChart);
+
+    return () => {
+      window.removeEventListener("moodEntriesUpdated", updateChart);
+      window.removeEventListener("focus", updateChart);
+      window.removeEventListener("pageshow", updateChart);
+    };
+  }, []);
 
   const recordedDays = data.filter((item) => item.level !== null).length;
 
@@ -109,7 +135,7 @@ const WeeklyMoodChart = () => {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={data}
-              margin={{ top: 15, right: 15, left: -20, bottom: 5 }}
+              margin={{ top: 15, right: 15, left: -15, bottom: 5 }}
             >
               <CartesianGrid
                 stroke="#e8eee3"

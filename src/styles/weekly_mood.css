@@ -31,7 +31,6 @@
 }
 
 .weekly-mood-heading span {
-  flex-shrink: 0;
   padding: 7px 12px;
   color: #d96573;
   background: #fff1f2;
@@ -46,7 +45,7 @@
 
 .weekly-mood-tooltip {
   padding: 10px 14px;
-  background: #ffffff;
+  background: white;
   border: 1px solid #f3cbd0;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(53, 71, 71, 0.1);
@@ -90,10 +89,6 @@
 @media (max-width: 480px) {
   .weekly-mood-card {
     padding: 16px;
-  }
-
-  .weekly-mood-heading h2 {
-    font-size: 21px;
   }
 
   .weekly-mood-chart {

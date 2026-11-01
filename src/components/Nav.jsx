@@ -36,7 +36,10 @@ const Nav = () => {
         onClick={() => setIsOpen(false)}
         aria-label="Mood Garden home"
       >
-        {/* <img src="/images/favicon.png" alt="" /> */}
+        <img
+          src="/public/icons/wired-lineal-1704-flower-in-reveal.gif"
+          alt=""
+        />
         <span className="mood-navbar__brand-name font-main">Mood Garden</span>
       </Link>
 

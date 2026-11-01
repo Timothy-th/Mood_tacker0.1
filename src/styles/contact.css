@@ -5,8 +5,7 @@
 .contact-page {
   box-sizing: border-box;
   min-height: 100vh;
-  padding: 112px 16px 40px;
-  background: rgba(255, 241, 242, 0.4);
+  background: #fff8f8;
 }
 
 .contact-page-container {
@@ -31,9 +30,9 @@
 }
 
 .contact-footer-title {
-  color: #881337;
-  font-family: "Sniglet", sans-serif;
-  font-size: 24px;
+  color: #df5462;
+  font-family: "Schoolbell", cursive;
+  font-size: 26px;
   font-weight: 700;
   line-height: 1.4;
 }
@@ -41,7 +40,7 @@
 .contact-footer-description {
   max-width: 672px;
   margin-top: 16px;
-  color: #4b5563;
+  color: #354747;
   font-family: "Sniglet", sans-serif;
   font-size: 14px;
   line-height: 28px;
@@ -49,51 +48,68 @@
 
 .contact-footer-copyright {
   margin-top: 24px;
-  color: #6b7280;
+  color: #75847d;
   font-family: "Sniglet", sans-serif;
   font-size: 14px;
 }
 
-/* Back to top */
+/* Back to Top - Same as Calendar */
 
-.contact-back-to-top {
+.calendar-back-to-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin: 30px auto 10px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.calendar-back-to-top button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 16px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
   transition: transform 0.2s ease;
 }
 
-.contact-back-to-top:hover {
+.calendar-back-to-top button:hover {
   transform: translateY(-4px);
 }
 
-.contact-back-to-top:focus-visible {
-  outline: 3px solid #fb7185;
-  outline-offset: 4px;
-  border-radius: 8px;
-}
-
-.contact-back-to-top img {
+.calendar-back-to-top img {
+  display: block;
   width: 48px;
   height: 48px;
   object-fit: contain;
 }
 
-/* Icon credit */
-
-.contact-icon-credit {
-  margin-top: 8px;
-  color: #f43f5e;
-  font-family: "Sniglet", sans-serif;
-  font-size: 12px;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
+.calendar-back-to-top button:focus-visible {
+  outline: 3px solid #df5462;
+  outline-offset: 4px;
+  border-radius: 8px;
 }
 
-.contact-icon-credit:hover {
-  color: #be123c;
+@media (prefers-reduced-motion: reduce) {
+  .calendar-back-to-top button {
+    transition: none;
+  }
+}
+/* Left Content */
+
+.contact-left-content {
+  margin: 32px auto;
+  text-align: center;
+}
+
+.contact-left-content h2 {
+  margin-bottom: 12px;
+  color: #df5462;
+  font-family: "Schoolbell", cursive;
+  font-weight: bold;
 }
 
 /* Responsive styles */

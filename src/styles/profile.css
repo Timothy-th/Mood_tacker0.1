@@ -1,24 +1,223 @@
-.container {
-  margin: 48px;
-}
-.upper_section {
-  height: 500px;
-}
-.bg-cover {
-  height: 300px;
-  background-color: antiquewhite;
-  border-radius: 20px;
+/* ==============================
+   PROFILE PAGE
+============================== */
+
+.profile-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Bio content on the left */
-.profile-bio {
+.upper-section {
   position: relative;
-  left: 100px;
-  top: 50px;
+  width: 100%;
+  min-height: 390px;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==============================
+   COVER IMAGE
+============================== */
+
+.bg-cover {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: 0;
+  padding: 0;
+}
+
+.cover-image-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+}
+
+.profile-cover-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ==============================
+   AVATAR
+============================== */
+
+.out_pro {
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transform: translateX(-50%);
+}
+
+.profile-avatar-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  height: 170px;
+  padding: 0;
+  overflow: hidden;
+  border: 3px solid #eb8189;
+  border-radius: 50%;
+  background: #fffdf8;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.profile-avatar-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 20px rgba(235, 129, 137, 0.25);
+}
+
+.profile-avatar-button:focus-visible {
+  outline: 3px solid #aad480;
+  outline-offset: 4px;
+}
+
+/* Empty avatar */
+
+.empty-avatar {
+  border: 2px dashed #eb8189;
+  background: #fff7f7;
+}
+
+.empty-avatar:hover {
+  background: #ffeded;
+}
+
+.create-avatar-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #d96573;
+  font-family: "Sniglet", sans-serif;
+  font-size: 13px;
+}
+
+.create-avatar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: #ffffff;
+  background: #eb8189;
+  border-radius: 50%;
+  font-size: 25px;
+}
+
+/* Saved avatar layers */
+
+.profile-avatar-layers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+}
+
+.profile-avatar-layers img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  transform: scale(1.5);
+  transform-origin: center 50%;
+}
+
+.profile-avatar-base {
   z-index: 1;
-  flex: 1;
-  min-width: 0;
-  max-width: 65%;
+}
+
+.profile-avatar-outfit {
+  z-index: 2;
+}
+
+.profile-avatar-hair {
+  z-index: 3;
+}
+
+.profile-avatar-accessory {
+  z-index: 4;
+}
+
+/* Avatar hover overlay */
+
+.avatar-hover-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #ffffff;
+  background: rgba(53, 71, 71, 0.65);
+  border-radius: 50%;
+  font-family: "Sniglet", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.avatar-hover-overlay span:first-child {
+  font-size: 25px;
+}
+
+.profile-avatar-button.has-avatar:hover .avatar-hover-overlay,
+.profile-avatar-button.has-avatar:focus-visible .avatar-hover-overlay {
+  opacity: 1;
+}
+
+.profile-avatar-button.has-avatar:hover .profile-avatar-layers {
+  transform: scale(1.05);
+}
+
+/* ==============================
+   BIO BELOW AVATAR
+============================== */
+
+.profile-bio-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 850px;
+  margin: 64px auto 0;
+  padding: 25px 30px;
+  box-sizing: border-box;
+  text-align: center;
+  /* background: #fff8f8;
+  border: 1px solid #f6dfe3; */
+  border-radius: 24px;
+  /* box-shadow: 0 5px 18px rgba(53, 71, 71, 0.06); */
+}
+
+.profile-bio {
+  width: 100%;
   overflow-wrap: anywhere;
 }
 
@@ -26,13 +225,13 @@
   margin: 0 0 12px;
   color: #df5462;
   font-family: "Schoolbell", cursive;
-  font-size: 48px;
+  font-size: 38px;
   line-height: 1.3;
 }
 
 .profile-bio-text {
   margin: 0;
-  color: #eb8189;
+  color: #354747;
   font-family: "Sniglet", sans-serif;
   font-size: 15px;
   line-height: 1.8;
@@ -41,58 +240,49 @@
 
 .profile-bio-placeholder {
   margin: 0;
-  color: #657575;
+  color: #77c981;
   font-family: "Schoolbell", cursive;
   font-size: 23px;
 }
 
-/* Add/Edit button */
+/* Add / Edit Bio button */
+
 .add-bio-btn {
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-  padding: 12px 20px;
-  left: 100px;
-  top: 100px;
-
+  position: static;
+  padding: 10px 20px;
   color: #ffffff;
-  background: #eb8189;
-  border: 2px solid #eb8189;
+  background: #df5462;
+  border: 2px solid #df5462;
   border-radius: 14px;
-
   font-family: "Sniglet", sans-serif;
   font-size: 14px;
   cursor: pointer;
-
-  box-shadow: 0 4px 12px rgba(235, 129, 137, 0.2);
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .add-bio-btn:hover {
-  background: #d96573;
-  border-color: #d96573;
+  background: #c94352;
+  border-color: #c94352;
   transform: translateY(-2px);
 }
 
-/* Popup overlay */
+/* ==============================
+   BIO MODAL
+============================== */
+
 .bio-modal-overlay {
   position: fixed;
   inset: 0;
   z-index: 2000;
-
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
-
   background: rgba(40, 55, 50, 0.4);
   backdrop-filter: blur(4px);
 }
 
-/* Popup window */
 .bio-modal {
   position: relative;
   width: 100%;
@@ -101,12 +291,10 @@
   overflow-y: auto;
   padding: 30px;
   box-sizing: border-box;
-
   background: #fffdf8;
   border: 1px solid #f6dfe3;
   border-radius: 22px;
   box-shadow: 0 15px 50px rgba(53, 71, 71, 0.18);
-
   font-family: "Sniglet", sans-serif;
   animation: bio-popup-in 0.2s ease-out;
 }
@@ -130,12 +318,10 @@
   position: absolute;
   top: 14px;
   right: 17px;
-
   padding: 0;
   color: #8b9292;
   background: transparent;
   border: none;
-
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
@@ -163,13 +349,11 @@
   width: 100%;
   padding: 12px 14px;
   box-sizing: border-box;
-
   color: #354747;
   background: #ffffff;
   border: 1px solid #f0cbd2;
   border-radius: 12px;
   outline: none;
-
   font-family: "Sniglet", sans-serif;
   font-size: 14px;
 }
@@ -230,127 +414,138 @@
   outline-offset: 3px;
 }
 
-/* Profile avatar circle */
+/* ==============================
+   CURRENT DEVELOPMENT
+============================== */
 
-.out_pro {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
+.current-section {
+  margin-top: 35px;
+  padding: 40px 20px;
 }
 
-.profile-avatar-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 170px;
-  height: 170px;
-  padding: 0;
-  overflow: hidden;
-
-  border: 3px solid #eb8189;
-  border-radius: 50%;
-  background: #fffdf8;
-  cursor: pointer;
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+.section-heading {
+  margin-bottom: 35px;
+  text-align: center;
 }
 
-.profile-avatar-button:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 20px rgba(235, 129, 137, 0.25);
-}
-
-.profile-avatar-button:focus-visible {
-  outline: 3px solid #aad480;
-  outline-offset: 4px;
-}
-
-/* Empty avatar */
-
-.empty-avatar {
-  border: 2px dashed #eb8189;
-  background: #fff7f7;
-}
-
-.empty-avatar:hover {
-  background: #ffeded;
-}
-
-.create-avatar-hint {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-
-  color: #d96573;
+.section-subtitle {
+  color: #eb8189;
   font-family: "Sniglet", sans-serif;
   font-size: 13px;
 }
 
-.create-avatar-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.section-heading h2,
+.project-purpose h2 {
+  margin: 8px 0;
+  color: #354747;
+  font-family: "Schoolbell", cursive;
+  font-size: 36px;
+}
 
-  width: 38px;
-  height: 38px;
+.section-heading p {
+  color: #858c8c;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+}
 
-  color: #ffffff;
-  background: #eb8189;
-  border-radius: 50%;
+/* Feature cards */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e5efdc;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(53, 71, 71, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(53, 71, 71, 0.1);
+}
+
+.feature-card img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.feature-card-content {
+  padding: 22px;
+}
+
+.feature-status {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #d96573;
+  background: #fff1f2;
+  border-radius: 20px;
+  font-family: "Sniglet", sans-serif;
+  font-size: 11px;
+}
+
+.feature-card h3 {
+  margin: 14px 0 8px;
+  color: #354747;
+  font-family: "Schoolbell", cursive;
   font-size: 25px;
 }
 
-/* Saved avatar layers */
-
-.profile-avatar-layers {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  border-radius: 50%;
+.feature-card p {
+  margin: 0;
+  color: #858c8c;
+  font-family: "Sniglet", sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
 }
 
-.profile-avatar-layers img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
+/* Project purpose */
+
+.project-purpose {
+  max-width: 850px;
+  margin: 65px auto 30px;
+  padding: 45px;
+  text-align: center;
+  background: #fff8f8;
+  border: 1px solid #f6dfe3;
+  border-radius: 24px;
 }
 
-.profile-avatar-base {
-  z-index: 1;
+.purpose-icon {
+  margin-bottom: 12px;
+  color: #eb8189;
+  font-size: 35px;
+}
+.purpose-icon img {
+  width: 45px;
+  height: 45px;
 }
 
-.profile-avatar-outfit {
-  z-index: 2;
+.project-purpose h2 {
+  margin-bottom: 20px;
 }
 
-.profile-avatar-hair {
-  z-index: 3;
+.project-purpose p {
+  color: #657575;
+  font-family: "Sniglet", sans-serif;
+  font-size: 15px;
+  line-height: 2;
 }
 
-.profile-avatar-accessory {
-  z-index: 4;
-}
-
-@media (max-width: 600px) {
-  .profile-avatar-button {
-    width: 125px;
-    height: 125px;
-  }
-
-  .create-avatar-hint {
-    font-size: 11px;
-  }
-}
+/* ==============================
+   ANIMATIONS
+============================== */
 
 @keyframes bio-popup-in {
   from {
@@ -364,21 +559,40 @@
   }
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .bg-cover {
-    min-height: 220px;
-    padding: 22px;
-    gap: 12px;
-    align-items: flex-start;
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 700px) {
+  .upper-section {
+    min-height: 340px;
   }
 
-  .profile-bio {
-    max-width: 75%;
+  .bg-cover {
+    height: 240px;
+  }
+
+  .out_pro {
+    top: 175px;
+  }
+
+  .profile-avatar-button {
+    width: 125px;
+    height: 125px;
+  }
+
+  .create-avatar-hint {
+    font-size: 11px;
+  }
+
+  .profile-bio-section {
+    width: calc(100% - 30px);
+    margin-top: 80px;
+    padding: 22px 18px;
   }
 
   .profile-bio-title {
-    font-size: 25px;
+    font-size: 30px;
   }
 
   .profile-bio-text {
@@ -390,8 +604,29 @@
   }
 
   .add-bio-btn {
-    padding: 9px 12px;
+    padding: 9px 14px;
     font-size: 12px;
+  }
+
+  .current-section {
+    padding: 30px 10px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading h2,
+  .project-purpose h2 {
+    font-size: 29px;
+  }
+
+  .project-purpose {
+    padding: 28px 20px;
+  }
+
+  .feature-card img {
+    height: 200px;
   }
 
   .bio-modal {
@@ -399,67 +634,66 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bio-modal {
-    animation: none;
+@media (max-width: 380px) {
+  .profile-avatar-button {
+    width: 110px;
+    height: 110px;
   }
+}
 
-  .add-bio-btn {
+@media (prefers-reduced-motion: reduce) {
+  .bio-modal,
+  .add-bio-btn,
+  .avatar-hover-overlay,
+  .profile-avatar-layers {
+    animation: none;
     transition: none;
   }
 }
+/* ==============================
+   BACK TO TOP
+============================== */
 
-/* Hover overlay for an existing avatar */
-.avatar-hover-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-
+.calendar-back-to-top {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin: 30px auto 10px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.calendar-back-to-top button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-
-  color: #ffffff;
-  background: rgba(53, 71, 71, 0.65);
-  border-radius: 50%;
-
-  font-family: "Sniglet", sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.avatar-hover-overlay span:first-child {
-  font-size: 25px;
+.calendar-back-to-top button:hover {
+  transform: translateY(-4px);
 }
 
-/* Show the overlay when hovering over the profile circle */
-.profile-avatar-button.has-avatar:hover .avatar-hover-overlay {
-  opacity: 1;
+.calendar-back-to-top img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
-/* Keyboard accessibility */
-.profile-avatar-button.has-avatar:focus-visible .avatar-hover-overlay {
-  opacity: 1;
-}
-
-/* Smooth avatar hover effect */
-.profile-avatar-button.has-avatar .profile-avatar-layers {
-  transition: transform 0.25s ease;
-}
-
-.profile-avatar-button.has-avatar:hover .profile-avatar-layers {
-  transform: scale(1.05);
+.calendar-back-to-top button:focus-visible {
+  outline: 3px solid #df5462;
+  outline-offset: 4px;
+  border-radius: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .avatar-hover-overlay,
-  .profile-avatar-layers {
+  .calendar-back-to-top button {
     transition: none;
   }
 }

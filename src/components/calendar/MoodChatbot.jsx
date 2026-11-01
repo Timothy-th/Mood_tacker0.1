@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import "../../styles/chatbot.css";
 
+// ========================================
+// DATE
+// ========================================
+
 const getToday = () => {
   const date = new Date();
   const year = date.getFullYear();
@@ -9,6 +13,10 @@ const getToday = () => {
 
   return `${year}-${month}-${day}`;
 };
+
+// ========================================
+// USER ID
+// ========================================
 
 const getUserId = () => {
   try {
@@ -22,14 +30,119 @@ const getUserId = () => {
   }
 };
 
-const getStorageKey = (userId, date) => {
-  return `moodChat_${userId}_${date}`;
+// ========================================
+// CHAT STORAGE
+// ========================================
+
+const getStorageKey = (userId) => {
+  return `moodChat_${userId}_all`;
 };
 
 const initialMessage = {
   role: "bot",
   text: "Hi! 💗 I'm here to listen. How are you feeling today?",
 };
+
+// ========================================
+// LOAD AND MIGRATE OLD CHAT HISTORY
+// ========================================
+
+const loadChatHistory = (userId) => {
+  const newKey = getStorageKey(userId);
+
+  try {
+    const existingChat = localStorage.getItem(newKey);
+
+    // Load existing continuous conversation
+    if (existingChat) {
+      const parsed = JSON.parse(existingChat);
+
+      return Array.isArray(parsed) && parsed.length ? parsed : [initialMessage];
+    }
+
+    // Find previous date-based conversations
+    const oldPrefix = `moodChat_${userId}_`;
+    const oldChats = [];
+
+    Object.keys(localStorage)
+      .filter(
+        (key) =>
+          key.startsWith(oldPrefix) &&
+          key !== newKey &&
+          /^\d{4}-\d{2}-\d{2}$/.test(key.slice(oldPrefix.length)),
+      )
+      .sort()
+      .forEach((key) => {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(key));
+
+          if (Array.isArray(parsed)) {
+            oldChats.push(...parsed);
+          }
+        } catch {
+          console.error("Could not migrate:", key);
+        }
+      });
+
+    // Remove repeated welcome messages
+    const migratedMessages = oldChats.filter(
+      (message) =>
+        message.role === "user" ||
+        (message.role === "bot" && message.text !== initialMessage.text),
+    );
+
+    const conversation = [initialMessage, ...migratedMessages];
+
+    localStorage.setItem(newKey, JSON.stringify(conversation));
+
+    return conversation;
+  } catch (error) {
+    console.error("Could not load chat history:", error);
+    return [initialMessage];
+  }
+};
+
+// ========================================
+// GET MOOD HISTORY AND DAILY NOTES
+// ========================================
+
+const getMoodContext = () => {
+  try {
+    const moodEntries = JSON.parse(localStorage.getItem("moodEntries") || "[]");
+
+    const calendarNotes = JSON.parse(
+      localStorage.getItem("calendarNotes") || "{}",
+    );
+
+    return {
+      moodHistory: moodEntries
+        .filter(
+          (entry) =>
+            entry &&
+            typeof entry.date === "string" &&
+            typeof entry.mood === "string",
+        )
+        .sort((a, b) => a.date.localeCompare(b.date))
+        .map((entry) => ({
+          date: entry.date,
+          mood: entry.mood,
+        })),
+
+      dailyNotes: calendarNotes,
+    };
+  } catch (error) {
+    console.error("Could not load mood context:", error);
+
+    return {
+      moodHistory: [],
+      dailyNotes: {},
+    };
+  }
+};
+
+// ========================================
+// CHATBOT COMPONENT
+// ========================================
 
 const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
   const [messages, setMessages] = useState([initialMessage]);
@@ -42,41 +155,24 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
 
   const userId = getUserId();
   const activeDate = selectedDate || getToday();
-  const storageKey = getStorageKey(userId, activeDate);
+  const storageKey = getStorageKey(userId);
 
   // ========================================
-  // LOAD CONVERSATION FOR USER AND DATE
+  // LOAD CONTINUOUS CONVERSATION
   // ========================================
 
   useEffect(() => {
-    try {
-      const savedConversation = localStorage.getItem(storageKey);
+    const savedMessages = loadChatHistory(userId);
 
-      if (savedConversation) {
-        const parsedMessages = JSON.parse(savedConversation);
-
-        if (Array.isArray(parsedMessages)) {
-          setMessages(parsedMessages);
-        } else {
-          setMessages([initialMessage]);
-        }
-      } else {
-        setMessages([initialMessage]);
-      }
-    } catch (error) {
-      console.error("Could not load chat history:", error);
-      setMessages([initialMessage]);
-    }
-
+    setMessages(savedMessages);
     setLoadedKey(storageKey);
-  }, [storageKey]);
+  }, [storageKey, userId]);
 
   // ========================================
   // SAVE CONVERSATION AUTOMATICALLY
   // ========================================
 
   useEffect(() => {
-    // Prevent old messages from overwriting another date's history.
     if (loadedKey !== storageKey) return;
 
     try {
@@ -110,7 +206,9 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
 
     const text = input.trim();
 
-    if (!text || isLoading || loadedKey !== storageKey) return;
+    if (!text || isLoading || loadedKey !== storageKey) {
+      return;
+    }
 
     const userMessage = {
       role: "user",
@@ -124,6 +222,7 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
     setIsLoading(true);
 
     try {
+      // Keep the most recent conversation context
       const conversationHistory = updatedMessages
         .filter((message) => message.role === "user" || message.role === "bot")
         .slice(-12)
@@ -132,6 +231,9 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
           content: message.text,
         }));
 
+      // Load complete emotional history
+      const moodContext = getMoodContext();
+
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -139,9 +241,15 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
         },
         body: JSON.stringify({
           messages: conversationHistory,
+
+          // Current calendar context
           currentMood,
-          selectedDate,
+          selectedDate: activeDate,
           calendarNote,
+
+          // Complete emotional history
+          moodHistory: moodContext.moodHistory,
+          dailyNotes: moodContext.dailyNotes,
         }),
       });
 
@@ -181,26 +289,27 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
   // DATE AND TIME
   // ========================================
 
-  const formattedDate = activeDate
-    ? new Date(`${activeDate}T12:00:00`).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      })
-    : new Date().toLocaleDateString("en-GB");
+  const formattedDate = new Date(`${activeDate}T12:00:00`).toLocaleDateString(
+    "en-GB",
+    {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    },
+  );
 
   const formattedTime = new Date().toLocaleTimeString();
 
+  // ========================================
+  // CLEAR CHAT
+  // ========================================
+
   const handleClearChat = () => {
-    localStorage.removeItem(storageKey);
+    const newMessages = [initialMessage];
 
-    setMessages([
-      {
-        role: "bot",
-        text: "Hi! 💗 I'm here to listen. How are you feeling today?",
-      },
-    ]);
+    localStorage.setItem(storageKey, JSON.stringify(newMessages));
 
+    setMessages(newMessages);
     setShowClearPopup(false);
   };
 
@@ -260,8 +369,8 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
           className="clear-chat-btn"
         >
           🗑
-          {/* Clear Chat */}
         </button>
+
         <input
           type="text"
           value={input}
@@ -283,10 +392,12 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
 
       <div className="chatbot-footer">
         <h3>Feel Better? ♡</h3>
+
         <p>
           Remember, every feeling is valid. You can take things one step at a
           time.
         </p>
+
         {showClearPopup && (
           <div
             className="clear-popup-overlay"

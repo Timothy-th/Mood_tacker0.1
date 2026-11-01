@@ -16,7 +16,7 @@
 /* Heading */
 .feeling-title {
   margin: 0 0 28px;
-  color: #77c981;
+  color: #354747;
   font-family: "Schoolbell", cursive;
   font-size: 34px;
   font-weight: normal;
@@ -80,7 +80,7 @@
 
 .feeling-name {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* Feedback message */

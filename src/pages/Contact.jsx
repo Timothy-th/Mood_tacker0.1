@@ -1,12 +1,38 @@
 import ContactForm from "../components/contact/ContactForm";
+import Footer from "../components/Footer";
+
 import "../styles/contact.css";
+import "../styles/cal_layout.css";
 
 const Contact = () => {
+  const handleBackToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <main className="contact-page">
-      <div className="contact-page-container">
-        <ContactForm />
-      </div>
+    <>
+      <main className="contact-page" id="to-top">
+        <div className="contact-page-container">
+          {/* Left Section - Background Image */}
+          <section className="contact-left-section">
+            <div className="contact-left-content">
+              <h2>Let's Connect!</h2>
+              <p>
+                Every thought, story, and feeling deserves to be heard. I'd love
+                to hear from you.
+              </p>
+            </div>
+          </section>
+
+          {/* Right Section - Contact Form */}
+          <section className="contact-right-section">
+            <ContactForm />
+          </section>
+        </div>
+      </main>
 
       <footer className="contact-footer">
         <div className="contact-footer-content">
@@ -22,29 +48,24 @@ const Contact = () => {
           <p className="contact-footer-copyright">
             © 2026 Mood Tracker Project
           </p>
-
-          <a
-            href="#to-top"
-            aria-label="Back to top"
-            className="contact-back-to-top"
-          >
-            <img
-              src="/image/wired-lineal-259-share-arrow-hover-pointing.gif"
-              alt=""
-            />
-          </a>
-
-          <a
-            href="https://lordicon.com/"
-            target="_blank"
-            rel="noreferrer"
-            className="contact-icon-credit"
-          >
-            Icons by Lordicon.com
-          </a>
         </div>
       </footer>
-    </main>
+      {/* Back to Top */}
+      <div className="calendar-back-to-top">
+        <button
+          type="button"
+          onClick={handleBackToTop}
+          aria-label="Back to top"
+        >
+          <img
+            src="/icons/wired-lineal-259-share-square-arrow-in-reveal.gif"
+            alt="to top"
+          />
+        </button>
+      </div>
+
+      <Footer />
+    </>
   );
 };
 
