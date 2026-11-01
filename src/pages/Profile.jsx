@@ -5,6 +5,14 @@ import Footer from "../components/Footer";
 import "../styles/global.css";
 import "../styles/profile.css";
 
+const getUserStorageKey = (key) => {
+  const user = JSON.parse(
+    localStorage.getItem("moodGardenCurrentUser") || "null",
+  );
+
+  return user?.id ? `${key}_${user.id}` : null;
+};
+
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,11 +35,18 @@ const Profile = () => {
   // Reload the latest saved avatar whenever you return to Profile
   useEffect(() => {
     try {
-      const female = localStorage.getItem("femaleAvatar");
-      const male = localStorage.getItem("maleAvatar");
+      const femaleKey = getUserStorageKey("femaleAvatar");
+      const maleKey = getUserStorageKey("maleAvatar");
+      const genderKey = getUserStorageKey("selectedAvatarGender");
 
-      // Read the most recently saved avatar
-      const lastGender = localStorage.getItem("selectedAvatarGender");
+      if (!femaleKey || !maleKey || !genderKey) {
+        setSavedAvatar(null);
+        return;
+      }
+
+      const female = localStorage.getItem(femaleKey);
+      const male = localStorage.getItem(maleKey);
+      const lastGender = localStorage.getItem(genderKey);
 
       if (lastGender === "female" && female) {
         setSavedAvatar({
@@ -61,7 +76,6 @@ const Profile = () => {
       setSavedAvatar(null);
     }
   }, [location.key]);
-
   const handleAvatarClick = () => {
     navigate("/ava");
   };
@@ -74,16 +88,41 @@ const Profile = () => {
   // Load the saved bio
   useEffect(() => {
     try {
-      const savedBio = JSON.parse(localStorage.getItem("profileBio") || "null");
+      const bioKey = getUserStorageKey("profileBio");
 
-      if (savedBio) {
-        setBioTitle(savedBio.title || "");
-        setBioText(savedBio.bio || "");
+      if (!bioKey) {
+        setBioTitle("");
+        setBioText("");
+        return;
       }
+
+      const saveBio = (e) => {
+        e.preventDefault();
+
+        const bioKey = getUserStorageKey("profileBio");
+
+        if (!bioKey) return;
+
+        const newBio = {
+          title: draftTitle.trim(),
+          bio: draftBio.trim(),
+        };
+
+        setBioTitle(newBio.title);
+        setBioText(newBio.bio);
+
+        localStorage.setItem(bioKey, JSON.stringify(newBio));
+
+        setShowBioModal(false);
+      };
+      setBioTitle(savedBio?.title || "");
+      setBioText(savedBio?.bio || "");
     } catch (error) {
       console.error("Could not load profile bio:", error);
+      setBioTitle("");
+      setBioText("");
     }
-  }, []);
+  }, [location.key]);
 
   const openBioModal = () => {
     setDraftTitle(bioTitle);

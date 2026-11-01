@@ -106,13 +106,14 @@ const loadChatHistory = (userId) => {
 // GET MOOD HISTORY AND DAILY NOTES
 // ========================================
 
-const getMoodContext = () => {
+const getMoodContext = (userId) => {
   try {
-    const moodEntries = JSON.parse(localStorage.getItem("moodEntries") || "[]");
+    const moodKey = `moodEntries_${userId}`;
+    const notesKey = `calendarNotes_${userId}`;
 
-    const calendarNotes = JSON.parse(
-      localStorage.getItem("calendarNotes") || "{}",
-    );
+    const moodEntries = JSON.parse(localStorage.getItem(moodKey) || "[]");
+
+    const calendarNotes = JSON.parse(localStorage.getItem(notesKey) || "{}");
 
     return {
       moodHistory: moodEntries
@@ -139,7 +140,6 @@ const getMoodContext = () => {
     };
   }
 };
-
 // ========================================
 // CHATBOT COMPONENT
 // ========================================
@@ -232,8 +232,7 @@ const MoodChatbot = ({ selectedDate, currentMood, calendarNote }) => {
         }));
 
       // Load complete emotional history
-      const moodContext = getMoodContext();
-
+      const moodContext = getMoodContext(userId);
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {

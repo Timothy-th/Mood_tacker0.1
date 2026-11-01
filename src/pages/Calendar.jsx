@@ -5,6 +5,14 @@ import Footer from "../components/Footer";
 import "../styles/cal_layout.css";
 import "../styles/global.css";
 
+const getUserStorageKey = (key) => {
+  const user = JSON.parse(
+    localStorage.getItem("moodGardenCurrentUser") || "null",
+  );
+
+  return user?.id ? `${key}_${user.id}` : null;
+};
+
 const getLocalDate = () => {
   const date = new Date();
   const year = date.getFullYear();
@@ -16,14 +24,17 @@ const getLocalDate = () => {
 
 const loadNotes = () => {
   try {
-    return JSON.parse(localStorage.getItem("calendarNotes") || "{}");
+    const key = getUserStorageKey("calendarNotes");
+    return key ? JSON.parse(localStorage.getItem(key) || "{}") : {};
   } catch {
     return {};
   }
 };
+
 const loadMoodEntries = () => {
   try {
-    return JSON.parse(localStorage.getItem("moodEntries") || "[]");
+    const key = getUserStorageKey("moodEntries");
+    return key ? JSON.parse(localStorage.getItem(key) || "[]") : [];
   } catch {
     return [];
   }
@@ -75,7 +86,6 @@ const Calendar = () => {
         />
       </div>
 
-      {/* Back to Top */}
       <div className="calendar-back-to-top">
         <button
           type="button"

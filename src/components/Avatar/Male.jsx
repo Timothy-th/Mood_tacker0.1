@@ -23,6 +23,13 @@ const itemsByCategory = {
   ],
   accessory: ["at1.png", "at2.png", "at3.png", "at4.png", "at5.png", "at6.png"],
 };
+const getUserStorageKey = (key) => {
+  const user = JSON.parse(
+    localStorage.getItem("moodGardenCurrentUser") || "null",
+  );
+
+  return user?.id ? `${key}_${user.id}` : null;
+};
 
 const Male = () => {
   const navigate = useNavigate();
@@ -34,29 +41,42 @@ const Male = () => {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    const savedAvatar = localStorage.getItem("maleAvatar");
+    const storageKey = getUserStorageKey("maleAvatar");
 
-    if (savedAvatar) {
-      try {
+    if (!storageKey) return;
+
+    try {
+      const savedAvatar = localStorage.getItem(storageKey);
+
+      if (savedAvatar) {
         const avatar = JSON.parse(savedAvatar);
+
         setHair(avatar.hair || "");
         setOutfit(avatar.outfit || "");
         setAccessory(avatar.accessory || "");
-      } catch {
-        localStorage.removeItem("maleAvatar");
       }
+    } catch (error) {
+      console.error("Could not load male avatar:", error);
     }
   }, []);
 
   const handleSaveAvatar = () => {
+    const avatarKey = getUserStorageKey("maleAvatar");
+    const genderKey = getUserStorageKey("selectedAvatarGender");
+
+    if (!avatarKey || !genderKey) {
+      alert("Please sign in before saving your avatar.");
+      return;
+    }
+
     const avatar = { hair, outfit, accessory };
 
-    localStorage.setItem("maleAvatar", JSON.stringify(avatar));
-    localStorage.setItem("selectedAvatarGender", "male");
+    localStorage.setItem(avatarKey, JSON.stringify(avatar));
+    localStorage.setItem(genderKey, "male");
 
+    setSaved(true);
     navigate("/profile");
   };
-
   const selectedItems = {
     hair,
     outfit,

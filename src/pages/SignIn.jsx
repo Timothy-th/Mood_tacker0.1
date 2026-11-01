@@ -26,8 +26,9 @@ const SignIn = () => {
       const users = JSON.parse(localStorage.getItem("moodGardenUsers") || "[]");
 
       const cleanEmail = email.trim().toLowerCase();
-      const user = users.find((item) => item.email === cleanEmail);
-
+      const user = users.find(
+        (item) => item.email?.trim().toLowerCase() === cleanEmail,
+      );
       if (!user) {
         setError("Account not found. Please sign up first.");
         return;

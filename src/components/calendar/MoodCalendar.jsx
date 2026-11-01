@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -22,16 +22,22 @@ const getMoodEmoji = (mood) => {
 
   return moods[mood.trim().toLowerCase()] || "💌";
 };
+const getUserStorageKey = (key) => {
+  const user = JSON.parse(
+    localStorage.getItem("moodGardenCurrentUser") || "null",
+  );
 
+  return user?.id ? `${key}_${user.id}` : null;
+};
 const MoodCalendar = ({ notes, onNotesChange, onDateSelect }) => {
   const [events, setEvents] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem("calendarEvents") || "[]");
+      const key = getUserStorageKey("calendarEvents");
+      return key ? JSON.parse(localStorage.getItem(key) || "[]") : [];
     } catch {
       return [];
     }
   });
-
   const [selectedNote, setSelectedNote] = useState(null);
   const [noteInput, setNoteInput] = useState("");
 
@@ -78,9 +84,16 @@ const MoodCalendar = ({ notes, onNotesChange, onDateSelect }) => {
     onNotesChange(updatedNotes);
     onDateSelect(date);
 
-    localStorage.setItem("calendarEvents", JSON.stringify(updatedEvents));
+    const eventsKey = getUserStorageKey("calendarEvents");
+    const notesKey = getUserStorageKey("calendarNotes");
 
-    localStorage.setItem("calendarNotes", JSON.stringify(updatedNotes));
+    if (eventsKey) {
+      localStorage.setItem(eventsKey, JSON.stringify(updatedEvents));
+    }
+
+    if (notesKey) {
+      localStorage.setItem(notesKey, JSON.stringify(updatedNotes));
+    }
 
     setSelectedNote(null);
     setNoteInput("");

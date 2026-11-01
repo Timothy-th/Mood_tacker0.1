@@ -3,6 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 import "../../styles/feeling.css";
 
+const getUserStorageKey = (key) => {
+  const user = JSON.parse(
+    localStorage.getItem("moodGardenCurrentUser") || "null",
+  );
+
+  return user?.id ? `${key}_${user.id}` : null;
+};
+
 const moods = [
   { emoji: "😊", name: "Happy" },
   { emoji: "😢", name: "Sad" },
@@ -30,24 +38,29 @@ const ChooseMood = ({ onSubmitMood }) => {
       return;
     }
 
+    const storageKey = getUserStorageKey("moodEntries");
+
+    if (!storageKey) {
+      setMessage("Please sign in before recording your mood.");
+      return;
+    }
+
     const moodEntry = {
       mood: selectedMood,
       date: new Date().toLocaleDateString("en-CA"),
       timestamp: new Date().toISOString(),
     };
 
-    const savedMoods = JSON.parse(localStorage.getItem("moodEntries") || "[]");
+    const savedMoods = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
     savedMoods.push(moodEntry);
 
-    localStorage.setItem("moodEntries", JSON.stringify(savedMoods));
+    localStorage.setItem(storageKey, JSON.stringify(savedMoods));
 
-    // Notify components that mood entries have changed
     window.dispatchEvent(new Event("moodEntriesUpdated"));
 
     onSubmitMood?.(moodEntry);
 
-    // Navigate to the Calendar page
     navigate("/cal");
   };
   return (
