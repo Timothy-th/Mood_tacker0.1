@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import "../../styles/weekly_mood.css";
 
+// Mood levels
 const moodLevels = {
   happy: 5,
   excited: 5,
@@ -28,12 +29,31 @@ const moodLevels = {
   angry: 1,
 };
 
+// Get current user's storage key
+const getUserStorageKey = (key) => {
+  try {
+    const user = JSON.parse(
+      localStorage.getItem("moodGardenCurrentUser") || "null",
+    );
+
+    return user?.id ? `${key}_${user.id}` : null;
+  } catch {
+    return null;
+  }
+};
+
+// Get weekly mood data for the current account
 const getWeeklyData = () => {
   let entries = [];
 
   try {
-    entries = JSON.parse(localStorage.getItem("moodEntries") || "[]");
-  } catch {
+    const storageKey = getUserStorageKey("moodEntries");
+
+    if (!storageKey) return [];
+
+    entries = JSON.parse(localStorage.getItem(storageKey) || "[]");
+  } catch (error) {
+    console.error("Could not load weekly mood data:", error);
     entries = [];
   }
 
@@ -72,6 +92,7 @@ const getWeeklyData = () => {
   return result;
 };
 
+// Custom tooltip
 const CustomTooltip = ({ active, payload }) => {
   if (!active || !payload?.length) return null;
 
@@ -95,19 +116,18 @@ const WeeklyMoodChart = () => {
       setData(getWeeklyData());
     };
 
-    // Update when a new mood is saved
     window.addEventListener("moodEntriesUpdated", updateChart);
-
-    // Update when returning to the browser tab
     window.addEventListener("focus", updateChart);
-
-    // Update when navigating back to the page
     window.addEventListener("pageshow", updateChart);
+
+    // Update when the current account changes
+    window.addEventListener("storage", updateChart);
 
     return () => {
       window.removeEventListener("moodEntriesUpdated", updateChart);
       window.removeEventListener("focus", updateChart);
       window.removeEventListener("pageshow", updateChart);
+      window.removeEventListener("storage", updateChart);
     };
   }, []);
 
@@ -135,7 +155,12 @@ const WeeklyMoodChart = () => {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={data}
-              margin={{ top: 15, right: 15, left: -15, bottom: 5 }}
+              margin={{
+                top: 15,
+                right: 15,
+                left: -15,
+                bottom: 5,
+              }}
             >
               <CartesianGrid
                 stroke="#e8eee3"
