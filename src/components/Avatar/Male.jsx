@@ -78,7 +78,7 @@ const Male = () => {
       {/* LEFT: Male avatar preview */}
       <section className="avatar-preview">
         <img
-          src="/images/photo_2025-06-07_19-02-43.jpg"
+          src="/images/profile-cover.png"
           alt=""
           className="avatar-background"
         />
