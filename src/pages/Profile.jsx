@@ -1,16 +1,21 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import "../styles/global.css";
 import "../styles/profile.css";
 
+// Get storage key for the currently logged-in account
 const getUserStorageKey = (key) => {
-  const user = JSON.parse(
-    localStorage.getItem("moodGardenCurrentUser") || "null",
-  );
+  try {
+    const user = JSON.parse(
+      localStorage.getItem("moodGardenCurrentUser") || "null",
+    );
 
-  return user?.id ? `${key}_${user.id}` : null;
+    return user?.id ? `${key}_${user.id}` : null;
+  } catch (error) {
+    console.error("Could not get current user:", error);
+    return null;
+  }
 };
 
 const Profile = () => {
@@ -24,6 +29,7 @@ const Profile = () => {
   const [draftTitle, setDraftTitle] = useState("");
   const [draftBio, setDraftBio] = useState("");
 
+  // Back to top
   const handleBackToTop = () => {
     window.scrollTo({
       top: 0,
@@ -31,8 +37,7 @@ const Profile = () => {
     });
   };
 
-  // Reload the avatar when the user returns to this route
-  // Reload the latest saved avatar whenever you return to Profile
+  // Load account-specific avatar
   useEffect(() => {
     try {
       const femaleKey = getUserStorageKey("femaleAvatar");
@@ -76,16 +81,19 @@ const Profile = () => {
       setSavedAvatar(null);
     }
   }, [location.key]);
+
+  // Avatar navigation
   const handleAvatarClick = () => {
     navigate("/ava");
   };
 
+  // Avatar image path
   const getAvatarImage = (image) => {
     if (!image) return "";
     return image.startsWith("/") ? image : `/images/${image}`;
   };
 
-  // Load the saved bio
+  // Load bio belonging to the current account
   useEffect(() => {
     try {
       const bioKey = getUserStorageKey("profileBio");
@@ -96,25 +104,8 @@ const Profile = () => {
         return;
       }
 
-      const saveBio = (e) => {
-        e.preventDefault();
+      const savedBio = JSON.parse(localStorage.getItem(bioKey) || "null");
 
-        const bioKey = getUserStorageKey("profileBio");
-
-        if (!bioKey) return;
-
-        const newBio = {
-          title: draftTitle.trim(),
-          bio: draftBio.trim(),
-        };
-
-        setBioTitle(newBio.title);
-        setBioText(newBio.bio);
-
-        localStorage.setItem(bioKey, JSON.stringify(newBio));
-
-        setShowBioModal(false);
-      };
       setBioTitle(savedBio?.title || "");
       setBioText(savedBio?.bio || "");
     } catch (error) {
@@ -124,24 +115,39 @@ const Profile = () => {
     }
   }, [location.key]);
 
+  // Open bio editor
   const openBioModal = () => {
     setDraftTitle(bioTitle);
     setDraftBio(bioText);
     setShowBioModal(true);
   };
 
+  // Save bio for the current account
   const saveBio = (e) => {
     e.preventDefault();
+
+    const bioKey = getUserStorageKey("profileBio");
+
+    if (!bioKey) {
+      alert("Please sign in before saving your bio.");
+      return;
+    }
 
     const newBio = {
       title: draftTitle.trim(),
       bio: draftBio.trim(),
     };
 
-    setBioTitle(newBio.title);
-    setBioText(newBio.bio);
-    localStorage.setItem("profileBio", JSON.stringify(newBio));
-    setShowBioModal(false);
+    try {
+      localStorage.setItem(bioKey, JSON.stringify(newBio));
+
+      setBioTitle(newBio.title);
+      setBioText(newBio.bio);
+      setShowBioModal(false);
+    } catch (error) {
+      console.error("Could not save profile bio:", error);
+      alert("Could not save your bio. Please try again.");
+    }
   };
 
   return (
@@ -225,7 +231,7 @@ const Profile = () => {
             </button>
           </div>
 
-          {/* Bio below avatar */}
+          {/* Bio */}
           <div className="profile-bio-section">
             <div className="profile-bio">
               {bioTitle || bioText ? (
@@ -233,6 +239,7 @@ const Profile = () => {
                   {bioTitle && (
                     <h2 className="profile-bio-title">{bioTitle}</h2>
                   )}
+
                   {bioText && <p className="profile-bio-text">{bioText}</p>}
                 </>
               ) : (
@@ -251,6 +258,7 @@ const Profile = () => {
             </button>
           </div>
         </div>
+
         {/* Current Development */}
         <section className="current-section">
           <div className="section-heading">
@@ -265,6 +273,7 @@ const Profile = () => {
                 src="/images/garden-feature.png"
                 alt="Cozy garden and home decoration"
               />
+
               <div className="feature-card-content">
                 <span className="feature-status">Planned feature</span>
                 <h3>Garden & Home Life 🌸</h3>
@@ -280,6 +289,7 @@ const Profile = () => {
                 src="/images/multiplayer-feature.png"
                 alt="Cozy multiplayer virtual world"
               />
+
               <div className="feature-card-content">
                 <span className="feature-status">Future project</span>
                 <h3>A Cozy Little World 🏡</h3>
@@ -300,8 +310,11 @@ const Profile = () => {
                 alt="heart"
               />
             </div>
+
             <span className="section-subtitle">The reason behind it all</span>
+
             <h2>A Little World We Can Call Home</h2>
+
             <p>
               I want to create a little cozy virtual world where distance
               doesn't have to keep people apart. A place where friends, lovers,
@@ -309,6 +322,7 @@ const Profile = () => {
               chat about their days, play games, and enjoy the little things in
               life.
             </p>
+
             <p>
               More than just a game or a mood tracker, I hope this project can
               become a comforting space where people can create memories
@@ -316,6 +330,7 @@ const Profile = () => {
             </p>
           </div>
         </section>
+
         {/* Bio Modal */}
         {showBioModal && (
           <div
@@ -332,12 +347,14 @@ const Profile = () => {
               </button>
 
               <h2>Edit Your Bio ♡</h2>
+
               <p className="bio-modal-subtitle">
                 Tell everyone a little about your world.
               </p>
 
               <form onSubmit={saveBio}>
                 <label htmlFor="bio-title">Your title</label>
+
                 <input
                   id="bio-title"
                   type="text"
@@ -348,6 +365,7 @@ const Profile = () => {
                 />
 
                 <label htmlFor="bio-text">About you</label>
+
                 <textarea
                   id="bio-text"
                   placeholder="Write something about yourself..."
@@ -374,6 +392,7 @@ const Profile = () => {
             </div>
           </div>
         )}
+
         {/* Back to Top */}
         <div className="calendar-back-to-top">
           <button
@@ -388,6 +407,7 @@ const Profile = () => {
           </button>
         </div>
       </div>
+
       <Footer />
     </>
   );
