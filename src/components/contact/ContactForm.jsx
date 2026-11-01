@@ -43,25 +43,22 @@ const ContactForm = () => {
   const socialLinks = [
     {
       name: "Google",
-      image: "/public/icons/wired-lineal-2640-logo-circle-google-in-reveal.gif",
+      image: "/icons/wired-lineal-2640-logo-circle-google-in-reveal.gif",
       href: "#",
     },
     {
       name: "Facebook",
-      image:
-        "/public/icons/wired-lineal-2624-logo-circle-facebook-in-reveal.gif",
+      image: "/icons/wired-lineal-2624-logo-circle-facebook-in-reveal.gif",
       href: "#",
     },
     {
       name: "Twitter",
-      image:
-        "/public/icons/wired-lineal-2628-logo-circle-twitter-in-reveal.gif",
+      image: "/icons/wired-lineal-2628-logo-circle-twitter-in-reveal.gif",
       href: "#",
     },
     {
       name: "Discord",
-      image:
-        "/public/icons/wired-lineal-2649-logo-circle-discord-in-reveal.gif",
+      image: "/icons/wired-lineal-2649-logo-circle-discord-in-reveal.gif",
       href: "#",
     },
   ];

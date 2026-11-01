@@ -83,7 +83,7 @@ const Calendar = () => {
           aria-label="Back to top"
         >
           <img
-            src="/public/icons/wired-lineal-259-share-square-arrow-in-reveal.gif"
+            src="/icons/wired-lineal-259-share-square-arrow-in-reveal.gif"
             alt="to top"
           />
         </button>

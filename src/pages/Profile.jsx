@@ -257,7 +257,7 @@ const Profile = () => {
           <div className="project-purpose">
             <div className="purpose-icon">
               <img
-                src="/public/icons/doodle-color-20-heart-in-reveal.gif"
+                src="/icons/doodle-color-20-heart-in-reveal.gif"
                 alt="heart"
               />
             </div>

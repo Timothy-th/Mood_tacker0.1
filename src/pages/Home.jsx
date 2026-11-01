@@ -49,7 +49,7 @@ const Home = () => {
           <div className="hero-circle">
             <span>
               <img
-                src="/public/icons/wired-lineal-1704-flower-in-reveal.gif"
+                src="/icons/wired-lineal-1704-flower-in-reveal.gif"
                 alt="Animated heart"
                 className="mood-icon"
               />
@@ -103,7 +103,7 @@ const Home = () => {
               />
               <span className="quick-link-icon">
                 <img
-                  src="/public/icons/wired-lineal-1845-rose-in-reveal.gif"
+                  src="/icons/wired-lineal-1845-rose-in-reveal.gif"
                   alt="rose"
                 />
               </span>
@@ -131,7 +131,7 @@ const Home = () => {
               />
               <span className="quick-link-icon">
                 <img
-                  src="/public/icons/doodle-color-1732-plant-pot-in-reveal.gif"
+                  src="/icons/doodle-color-1732-plant-pot-in-reveal.gif"
                   alt="pot"
                 />
               </span>

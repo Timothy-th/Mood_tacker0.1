@@ -7,7 +7,7 @@ const Loading = () => {
       <div className="loading-content">
         <div className="loading-garden-icon" aria-hidden="true">
           <img
-            src="/public/icons/doodle-color-20-heart-in-reveal.gif"
+            src="/icons/doodle-color-20-heart-in-reveal.gif"
             alt="dendelion"
           />
         </div>
