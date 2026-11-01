@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/female.css";
 
 const categories = [
-  { id: "hair", label: "Hair", icon: "💇" },
+  { id: "hair", label: "Hair", icon: "🩷" },
   { id: "outfit", label: "Clothes", icon: "👗" },
   { id: "accessory", label: "Extras", icon: "💎" },
 ];
